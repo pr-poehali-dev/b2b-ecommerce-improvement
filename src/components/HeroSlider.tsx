@@ -12,25 +12,25 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    title: "Ваш заголовок услуги",
-    subtitle: "Ваш подзаголовок",
-    description: "Описание первой услуги или преимущества. Расскажите о том, как ваша компания решает задачи клиентов.",
+    title: "ИТ-консалтинг и аудит",
+    subtitle: "Next Level IT",
+    description: "Комплексные решения для цифровой трансформации вашего бизнеса. Аудит существующих систем и разработка стратегии развития.",
+    buttonText: "Получить консультацию",
+    backgroundImage: "url('/img/76e7716d-c60a-4321-bd78-079fd021ba5c.jpg')"
+  },
+  {
+    title: "E-commerce решения",
+    subtitle: "Онлайн продажи",
+    description: "Разработка и интеграция платформ электронной коммерции. Омниканальные решения для максимизации продаж.",
     buttonText: "Узнать больше",
-    backgroundImage: "url('/img/289ef35d-ab02-4e05-b5a2-3ef9f236b55b.jpg')"
+    backgroundImage: "url('/img/ca0493b6-5fa8-475c-b1f1-2e58d8b9d51b.jpg')"
   },
   {
-    title: "Вторая услуга компании",
-    subtitle: "Дополнительное направление",
-    description: "Опишите второе ключевое направление деятельности. Укажите конкретные выгоды для клиентов.",
-    buttonText: "Подробнее",
-    backgroundImage: "url('/img/b1d4fd00-e6b3-490b-bed1-5788f2141154.jpg')"
-  },
-  {
-    title: "Третья услуга или преимущество",
-    subtitle: "Уникальное предложение",
-    description: "Расскажите о третьем направлении работы или уникальном преимуществе вашей компании.",
-    buttonText: "Связаться с нами",
-    backgroundImage: "url('/img/289ef35d-ab02-4e05-b5a2-3ef9f236b55b.jpg')"
+    title: "Техническая поддержка",
+    subtitle: "24/7 мониторинг",
+    description: "Круглосуточная поддержка высоконагруженных проектов. Мониторинг, обслуживание и оптимизация систем.",
+    buttonText: "Подключить поддержку",
+    backgroundImage: "url('/img/6f9ce39b-23d6-44c1-b60b-85e462f49701.jpg')"
   }
 ];
 
@@ -120,7 +120,7 @@ export default function HeroSlider() {
                   size="lg" 
                   className="border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white px-8 py-3 font-avenir font-medium"
                 >
-                  Наши проекты
+                  Смотреть проекты
                   <Icon name="ExternalLink" size={20} className="ml-2" />
                 </Button>
               </div>

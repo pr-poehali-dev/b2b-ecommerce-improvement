@@ -23,7 +23,7 @@ const slides: Slide[] = [
     subtitle: "Онлайн продажи",
     description: "Разработка и интеграция платформ электронной коммерции. Омниканальные решения для максимизации продаж.",
     buttonText: "Узнать больше",
-    backgroundImage: "url('/img/25bfd547-883e-40aa-bfac-4b844522d73f.jpg')"
+    backgroundImage: "url('/img/ce4cddcc-0227-4793-9ebf-6d472064fa83.jpg')"
   },
   {
     title: "Техническая поддержка",

@@ -16,21 +16,21 @@ const slides: Slide[] = [
     subtitle: "Next Level IT",
     description: "Комплексные решения для цифровой трансформации вашего бизнеса. Аудит существующих систем и разработка стратегии развития.",
     buttonText: "Получить консультацию",
-    backgroundImage: "linear-gradient(135deg, #00938c 0%, #006b66 100%)"
+    backgroundImage: "url('/img/76e7716d-c60a-4321-bd78-079fd021ba5c.jpg')"
   },
   {
     title: "E-commerce решения",
     subtitle: "Онлайн продажи",
     description: "Разработка и интеграция платформ электронной коммерции. Омниканальные решения для максимизации продаж.",
     buttonText: "Узнать больше",
-    backgroundImage: "linear-gradient(135deg, #000000 0%, #333333 100%)"
+    backgroundImage: "url('/img/25bfd547-883e-40aa-bfac-4b844522d73f.jpg')"
   },
   {
     title: "Техническая поддержка",
     subtitle: "24/7 мониторинг",
     description: "Круглосуточная поддержка высоконагруженных проектов. Мониторинг, обслуживание и оптимизация систем.",
     buttonText: "Подключить поддержку",
-    backgroundImage: "linear-gradient(135deg, #00938c 0%, #000000 100%)"
+    backgroundImage: "url('/img/6f9ce39b-23d6-44c1-b60b-85e462f49701.jpg')"
   }
 ];
 
@@ -72,7 +72,12 @@ export default function HeroSlider() {
             index === currentSlide ? 'translate-x-0' : 
             index < currentSlide ? '-translate-x-full' : 'translate-x-full'
           }`}
-          style={{ background: slide.backgroundImage }}
+          style={{ 
+            backgroundImage: slide.backgroundImage,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
           <div className="absolute inset-0 bg-black/20" />
           
@@ -104,7 +109,7 @@ export default function HeroSlider() {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 font-avenir font-medium"
+                  className="border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white px-8 py-3 font-avenir font-medium"
                 >
                   Смотреть проекты
                   <Icon name="ExternalLink" size={20} className="ml-2" />

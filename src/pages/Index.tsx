@@ -257,35 +257,62 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-12">
+      <footer className="bg-black text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="font-inter font-bold text-white text-lg mb-4">IT Solutions</h3>
-              <p className="font-open-sans text-sm">
-                Профессиональные IT решения для автоматизации B2B процессов
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div className="md:col-span-2">
+              <h3 className="font-avenir font-bold text-white text-2xl mb-4">AWG</h3>
+              <p className="font-avenir text-gray-300 text-lg mb-6 max-w-md">
+                Ведущий ИТ-интегратор. Создаем цифровые решения для бизнеса следующего уровня.
               </p>
+              <div className="flex space-x-4">
+                <div className="w-10 h-10 bg-[#00938c] rounded-lg flex items-center justify-center hover:bg-[#00938c]/80 transition-colors cursor-pointer">
+                  <Icon name="Mail" size={20} className="text-white" />
+                </div>
+                <div className="w-10 h-10 bg-[#00938c] rounded-lg flex items-center justify-center hover:bg-[#00938c]/80 transition-colors cursor-pointer">
+                  <Icon name="Phone" size={20} className="text-white" />
+                </div>
+                <div className="w-10 h-10 bg-[#00938c] rounded-lg flex items-center justify-center hover:bg-[#00938c]/80 transition-colors cursor-pointer">
+                  <Icon name="MapPin" size={20} className="text-white" />
+                </div>
+              </div>
             </div>
             <div>
-              <h4 className="font-inter font-semibold text-white mb-4">Услуги</h4>
-              <ul className="font-open-sans text-sm space-y-2">
-                <li>E-commerce платформы</li>
-                <li>API интеграции</li>
-                <li>Электронный документооборот</li>
-                <li>BI-аналитика</li>
+              <h4 className="font-avenir font-semibold text-white text-lg mb-6">Услуги</h4>
+              <ul className="font-avenir text-gray-300 space-y-3">
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">ИТ-консалтинг</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">E-commerce решения</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Техническая поддержка</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Интеграции</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Аудит систем</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-inter font-semibold text-white mb-4">Контакты</h4>
-              <div className="font-open-sans text-sm space-y-2">
-                <p>+7 (495) 123-45-67</p>
-                <p>info@itsolutions.ru</p>
-                <p>Москва, ул. Примерная, 123</p>
-              </div>
+              <h4 className="font-avenir font-semibold text-white text-lg mb-6">Компания</h4>
+              <ul className="font-avenir text-gray-300 space-y-3">
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">О нас</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Проекты</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Команда</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Карьера</li>
+                <li className="hover:text-[#00938c] transition-colors cursor-pointer">Контакты</li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 mt-8 pt-8 text-center">
-            <p className="font-open-sans text-sm">© 2024 IT Solutions. Все права защищены.</p>
+          
+          <div className="border-t border-gray-800 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="font-avenir text-gray-400 text-sm mb-4 md:mb-0">
+                © 2024 AWG. Все права защищены. Next Level IT!
+              </p>
+              <div className="flex space-x-6">
+                <a href="#" className="font-avenir text-gray-400 text-sm hover:text-[#00938c] transition-colors">
+                  Политика конфиденциальности
+                </a>
+                <a href="#" className="font-avenir text-gray-400 text-sm hover:text-[#00938c] transition-colors">
+                  Условия использования
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

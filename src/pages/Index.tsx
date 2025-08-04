@@ -64,7 +64,7 @@ const Index = () => {
       <nav className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="font-inter font-bold text-xl text-slate-900">IT Solutions</div>
+            <div className="font-avenir font-bold text-xl text-black">AWG</div>
             <div className="hidden md:flex space-x-8">
               <a href="#services" className="text-slate-700 hover:text-primary transition-colors">Услуги</a>
               <a href="#solutions" className="text-slate-700 hover:text-primary transition-colors">Решения</a>
@@ -81,11 +81,11 @@ const Index = () => {
       <section className="py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto animate-fade-in">
-            <Badge className="mb-6 bg-blue-50 text-primary border-primary/20 animate-bounce-in">B2B IT Решения</Badge>
-            <h1 className="font-inter font-bold text-4xl md:text-6xl lg:text-7xl text-slate-900 mb-6 leading-tight animate-slide-up">
-              Цифровизация <span className="text-primary">B2B процессов</span> вашего бизнеса
+            <Badge className="mb-6 bg-[#00938c]/10 text-[#00938c] border-[#00938c]/20 animate-bounce-in">Next Level IT</Badge>
+            <h1 className="font-avenir font-bold text-4xl md:text-6xl lg:text-7xl text-black mb-6 leading-tight animate-slide-up">
+              Цифровизация <span className="text-[#00938c]">B2B процессов</span> вашего бизнеса
             </h1>
-            <p className="font-open-sans text-lg md:text-xl text-slate-600 mb-8 max-w-3xl mx-auto animate-fade-in [animation-delay:0.2s]">
+            <p className="font-avenir text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto animate-fade-in [animation-delay:0.2s]">
               Автоматизируем продажи, документооборот и аналитику. Увеличиваем эффективность на 85% и снижаем издержки в 3 раза.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in [animation-delay:0.4s]">
@@ -176,30 +176,30 @@ const Index = () => {
 
           {/* Interactive Metrics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-gradient-to-br from-[#00938c]/5 to-[#00938c]/10 border-[#00938c]/20 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Icon name="Clock" size={24} className="text-blue-600" />
-                  <h3 className="font-inter font-semibold text-slate-900">Время обработки</h3>
+                  <Icon name="Clock" size={24} className="text-[#00938c]" />
+                  <h3 className="font-avenir font-semibold text-black">Время обработки</h3>
                 </div>
                 <div className="space-y-2">
                   <Progress value={animatedValues.orders} className="h-2" />
-                  <p className="text-2xl font-bold text-blue-600">{animatedValues.orders}%</p>
-                  <p className="text-sm text-slate-600">быстрее обработка</p>
+                  <p className="text-2xl font-bold text-[#00938c]">{animatedValues.orders}%</p>
+                  <p className="text-sm text-gray-600">быстрее обработка</p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-gradient-to-br from-black/5 to-black/10 border-black/20 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Icon name="AlertTriangle" size={24} className="text-green-600" />
-                  <h3 className="font-inter font-semibold text-slate-900">Снижение ошибок</h3>
+                  <Icon name="AlertTriangle" size={24} className="text-black" />
+                  <h3 className="font-avenir font-semibold text-black">Снижение ошибок</h3>
                 </div>
                 <div className="space-y-2">
                   <Progress value={animatedValues.errors} className="h-2" />
-                  <p className="text-2xl font-bold text-green-600">{animatedValues.errors}%</p>
-                  <p className="text-sm text-slate-600">меньше ошибок</p>
+                  <p className="text-2xl font-bold text-black">{animatedValues.errors}%</p>
+                  <p className="text-sm text-gray-600">меньше ошибок</p>
                 </div>
               </CardContent>
             </Card>

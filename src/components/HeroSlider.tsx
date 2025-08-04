@@ -79,7 +79,16 @@ export default function HeroSlider() {
             backgroundRepeat: 'no-repeat'
           }}
         >
-          <div className="absolute inset-0 bg-black/20" />
+          {/* Diagonal overlay with gradient */}
+          <div className="absolute inset-0">
+            <div 
+              className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"
+              style={{
+                clipPath: 'polygon(0 0, 60% 0, 45% 100%, 0 100%)'
+              }}
+            />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
           
           <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
             <div className="max-w-2xl text-white">

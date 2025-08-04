@@ -82,7 +82,7 @@ export default function HeroSlider() {
           {/* Diagonal overlay with gradient */}
           <div className="absolute inset-0">
             <div 
-              className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-black via-black/70 via-black/40 to-transparent"
               style={{
                 clipPath: 'polygon(0 0, 60% 0, 45% 100%, 0 100%)'
               }}

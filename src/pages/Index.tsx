@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
+import HeroSlider from "@/components/HeroSlider";
 
 const Index = () => {
   const [animatedValues, setAnimatedValues] = useState({ orders: 0, errors: 0, satisfaction: 0, costs: 0 });
@@ -59,57 +60,35 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
+      <nav className="absolute top-0 left-0 right-0 z-50 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="font-avenir font-bold text-xl text-black">AWG</div>
+          <div className="flex justify-between items-center h-20">
+            <div className="font-avenir font-bold text-2xl text-white drop-shadow-lg">AWG</div>
             <div className="hidden md:flex space-x-8">
-              <a href="#services" className="text-slate-700 hover:text-primary transition-colors">Услуги</a>
-              <a href="#solutions" className="text-slate-700 hover:text-primary transition-colors">Решения</a>
-              <a href="#cases" className="text-slate-700 hover:text-primary transition-colors">Кейсы</a>
-              <a href="#roi" className="text-slate-700 hover:text-primary transition-colors">ROI</a>
-              <a href="#contact" className="text-slate-700 hover:text-primary transition-colors">Контакты</a>
+              <a href="#services" className="text-white/90 hover:text-white transition-colors font-avenir">Услуги</a>
+              <a href="#solutions" className="text-white/90 hover:text-white transition-colors font-avenir">Решения</a>
+              <a href="#cases" className="text-white/90 hover:text-white transition-colors font-avenir">Проекты</a>
+              <a href="#roi" className="text-white/90 hover:text-white transition-colors font-avenir">О нас</a>
+              <a href="#contact" className="text-white/90 hover:text-white transition-colors font-avenir">Контакты</a>
             </div>
-            <Button>Консультация</Button>
+            <Button className="bg-white text-black hover:bg-gray-100 font-avenir font-medium">Консультация</Button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto animate-fade-in">
-            <Badge className="mb-6 bg-[#00938c]/10 text-[#00938c] border-[#00938c]/20 animate-bounce-in">Next Level IT</Badge>
-            <h1 className="font-avenir font-bold text-4xl md:text-6xl lg:text-7xl text-black mb-6 leading-tight animate-slide-up">
-              Цифровизация <span className="text-[#00938c]">B2B процессов</span> вашего бизнеса
-            </h1>
-            <p className="font-avenir text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto animate-fade-in [animation-delay:0.2s]">
-              Автоматизируем продажи, документооборот и аналитику. Увеличиваем эффективность на 85% и снижаем издержки в 3 раза.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in [animation-delay:0.4s]">
-              <Button size="lg" className="px-8 transform hover:scale-105 transition-transform duration-200">
-                <Icon name="Rocket" size={20} className="mr-2" />
-                Начать проект
-              </Button>
-              <Button variant="outline" size="lg" className="px-8 transform hover:scale-105 transition-transform duration-200">
-                <Icon name="Play" size={20} className="mr-2" />
-                Посмотреть демо
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Slider Section */}
+      <HeroSlider />
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-inter font-bold text-3xl md:text-4xl text-slate-900 mb-4">
+            <h2 className="font-avenir font-bold text-3xl md:text-4xl text-black mb-4">
               Наши услуги
             </h2>
-            <p className="font-open-sans text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="font-avenir text-lg text-gray-600 max-w-2xl mx-auto">
               Комплексные решения для автоматизации и цифровизации B2B процессов
             </p>
           </div>
@@ -176,30 +155,34 @@ const Index = () => {
 
           {/* Interactive Metrics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card className="bg-gradient-to-br from-[#00938c]/5 to-[#00938c]/10 border-[#00938c]/20 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <Icon name="Clock" size={24} className="text-[#00938c]" />
-                  <h3 className="font-avenir font-semibold text-black">Время обработки</h3>
+            <Card className="bg-white border-gray-200 hover:shadow-xl transition-all duration-300 group">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-[#00938c] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon name="Clock" size={24} className="text-white" />
+                  </div>
+                  <h3 className="font-avenir font-semibold text-xl text-black">Время обработки</h3>
                 </div>
-                <div className="space-y-2">
-                  <Progress value={animatedValues.orders} className="h-2" />
-                  <p className="text-2xl font-bold text-[#00938c]">{animatedValues.orders}%</p>
-                  <p className="text-sm text-gray-600">быстрее обработка</p>
+                <div className="space-y-3">
+                  <Progress value={animatedValues.orders} className="h-3" />
+                  <p className="text-3xl font-bold text-[#00938c]">{animatedValues.orders}%</p>
+                  <p className="text-gray-600 font-avenir">быстрее обработка</p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-black/5 to-black/10 border-black/20 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <Icon name="AlertTriangle" size={24} className="text-black" />
-                  <h3 className="font-avenir font-semibold text-black">Снижение ошибок</h3>
+            <Card className="bg-white border-gray-200 hover:shadow-xl transition-all duration-300 group">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon name="AlertTriangle" size={24} className="text-white" />
+                  </div>
+                  <h3 className="font-avenir font-semibold text-xl text-black">Снижение ошибок</h3>
                 </div>
-                <div className="space-y-2">
-                  <Progress value={animatedValues.errors} className="h-2" />
-                  <p className="text-2xl font-bold text-black">{animatedValues.errors}%</p>
-                  <p className="text-sm text-gray-600">меньше ошибок</p>
+                <div className="space-y-3">
+                  <Progress value={animatedValues.errors} className="h-3" />
+                  <p className="text-3xl font-bold text-black">{animatedValues.errors}%</p>
+                  <p className="text-gray-600 font-avenir">меньше ошибок</p>
                 </div>
               </CardContent>
             </Card>

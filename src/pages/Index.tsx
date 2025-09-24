@@ -234,6 +234,169 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Competencies Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-inter font-bold text-3xl md:text-4xl text-slate-900 mb-4">
+              Компетенции для FinTech
+            </h2>
+            <p className="font-open-sans text-lg text-slate-600 max-w-2xl mx-auto">
+              Экспертиза в разработке цифровых решений для финансового сектора
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-200">
+              <CardHeader>
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
+                  <Icon name="Code" size={24} className="text-blue-600" />
+                </div>
+                <CardTitle className="font-inter text-xl text-slate-900">Разработка</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="font-open-sans text-slate-600 space-y-2">
+                  <li>• PWA-приложения для интернет-банкинга</li>
+                  <li>• Корпоративные и клиентские порталы</li>
+                  <li>• Решения на Битрикс24</li>
+                  <li>• Интеграция с отраслевыми системами</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-200">
+              <CardHeader>
+                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
+                  <Icon name="Search" size={24} className="text-green-600" />
+                </div>
+                <CardTitle className="font-inter text-xl text-slate-900">Аудит</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="font-open-sans text-slate-600 space-y-2">
+                  <li>• UX/UI и технические аудиты</li>
+                  <li>• Аудит безопасности и скорости</li>
+                  <li>• Оптимизация onboarding-сценариев</li>
+                  <li>• Отраслевые исследования FinTech</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-200">
+              <CardHeader>
+                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+                  <Icon name="Headphones" size={24} className="text-orange-600" />
+                </div>
+                <CardTitle className="font-inter text-xl text-slate-900">Поддержка 24/7</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="font-open-sans text-slate-600 space-y-2">
+                  <li>• Техническая поддержка по SLA</li>
+                  <li>• Мониторинг инфраструктуры</li>
+                  <li>• Реагирование на инциденты</li>
+                  <li>• Ежемесячная отчетность</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-200">
+              <CardHeader>
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
+                  <Icon name="Palette" size={24} className="text-purple-600" />
+                </div>
+                <CardTitle className="font-inter text-xl text-slate-900">UX/UI Дизайн</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="font-open-sans text-slate-600 space-y-2">
+                  <li>• UX-лаборатория для банков</li>
+                  <li>• Mobile-first подход</li>
+                  <li>• A/B-тестирование сценариев</li>
+                  <li>• Интерфейсы мобильных банков</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-200">
+              <CardHeader>
+                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-200 transition-colors">
+                  <Icon name="Shield" size={24} className="text-red-600" />
+                </div>
+                <CardTitle className="font-inter text-xl text-slate-900">Безопасность</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="font-open-sans text-slate-600 space-y-2">
+                  <li>• Отказоустойчивая инфраструктура</li>
+                  <li>• Защита от внешних угроз</li>
+                  <li>• Соответствие требованиям ЦБ РФ</li>
+                  <li>• Защита персональных данных</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-200">
+              <CardHeader>
+                <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-teal-200 transition-colors">
+                  <Icon name="Package" size={24} className="text-teal-600" />
+                </div>
+                <CardTitle className="font-inter text-xl text-slate-900">Продукты</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="font-open-sans text-slate-600 space-y-2">
+                  <li>• Low-code платформа A.CMS</li>
+                  <li>• Веб-аналитика на Visiology</li>
+                  <li>• Smart Engines для антифрода</li>
+                  <li>• Инфраструктура Yandex Cloud</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Key Benefits */}
+          <div className="bg-slate-50 rounded-2xl p-8">
+            <h3 className="font-inter font-bold text-2xl text-slate-900 mb-8 text-center">
+              Преимущества для финансового сектора
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                  <Icon name="Check" size={16} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-inter font-semibold text-slate-900 mb-1">Безопасность и надежность</h4>
+                  <p className="font-open-sans text-slate-600">Разработка с учетом требований регуляторов и защиты персональных данных</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                  <Icon name="Check" size={16} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-inter font-semibold text-slate-900 mb-1">Мобильность и гибкость</h4>
+                  <p className="font-open-sans text-slate-600">Быстрый запуск digital-решений в формате PWA и mobile-first</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                  <Icon name="Check" size={16} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-inter font-semibold text-slate-900 mb-1">Ориентация на результат</h4>
+                  <p className="font-open-sans text-slate-600">Аналитика, A/B-тесты, UX-исследования помогают повышать LTV и конверсию</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                  <Icon name="Check" size={16} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-inter font-semibold text-slate-900 mb-1">Круглосуточная поддержка</h4>
+                  <p className="font-open-sans text-slate-600">24/7 сопровождение, SLA-прозрачность и оперативное реагирование на инциденты</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

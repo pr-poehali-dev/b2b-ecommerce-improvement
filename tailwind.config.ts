@@ -19,8 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['AvenirNextCyr', 'ui-sans-serif', 'system-ui'],
-				avenir: ['AvenirNextCyr', 'ui-sans-serif', 'system-ui']
+				sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
+				heading: ['Cormorant Garamond', 'serif']
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -29,24 +29,24 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#00938c',
-					foreground: '#FFFFFF'
+					DEFAULT: '#d4a574',
+					foreground: '#1a1a1a'
 				},
 				secondary: {
-					DEFAULT: '#00938c',
-					foreground: '#FFFFFF'
+					DEFAULT: '#f5e6d3',
+					foreground: '#1a1a1a'
 				},
 				destructive: {
-					DEFAULT: '#00938c',
-					foreground: '#FFFFFF'
+					DEFAULT: '#ef4444',
+					foreground: '#ffffff'
 				},
 				muted: {
-					DEFAULT: '#00938c',
-					foreground: '#FFFFFF'
+					DEFAULT: '#f9fafb',
+					foreground: '#6b7280'
 				},
 				accent: {
-					DEFAULT: '#00938c',
-					foreground: '#FFFFFF'
+					DEFAULT: '#d4a574',
+					foreground: '#1a1a1a'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -59,17 +59,18 @@ export default {
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: '#00938c',
-					'primary-foreground': '#FFFFFF',
-					accent: '#00938c',
-					'accent-foreground': '#FFFFFF',
+					primary: '#d4a574',
+					'primary-foreground': '#1a1a1a',
+					accent: '#d4a574',
+					'accent-foreground': '#1a1a1a',
 					border: 'hsl(var(--sidebar-border))',
-					ring: '#00938c'
+					ring: '#d4a574'
 				},
-				awg: {
-					blue: '#00938c',
-					black: '#000000',
-					white: '#FFFFFF'
+				beauty: {
+					gold: '#d4a574',
+					beige: '#f5e6d3',
+					dark: '#1a1a1a',
+					gray: '#6b7280'
 				}
 			},
 			borderRadius: {

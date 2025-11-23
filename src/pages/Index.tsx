@@ -1,169 +1,195 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
-  const [activeService, setActiveService] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const services = [
+  const categories = [
+    { id: "all", name: "Все товары" },
+    { id: "face", name: "Уход за лицом" },
+    { id: "body", name: "Уход за телом" },
+    { id: "hair", name: "Уход за волосами" },
+    { id: "professional", name: "Профессиональная косметика" }
+  ];
+
+  const products = [
     {
-      title: "Чистки лица",
-      description: "Глубокое очищение и детоксикация кожи",
-      icon: "Sparkles",
-      price: "от 3 500 ₽"
+      id: 1,
+      name: "Увлажняющая сыворотка",
+      brand: "Luxury Cosmetics",
+      price: "4 500",
+      oldPrice: "5 200",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      category: "face",
+      badge: "Хит продаж"
     },
     {
-      title: "Массаж лица",
-      description: "Скульптурирующий и лимфодренажный",
-      icon: "Heart",
-      price: "от 4 000 ₽"
+      id: 2,
+      name: "Питательный крем для лица",
+      brand: "Professional Care",
+      price: "3 800",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      category: "face"
     },
     {
-      title: "Пилинги",
-      description: "Химические и механические пилинги",
-      icon: "Droplets",
-      price: "от 5 000 ₽"
+      id: 3,
+      name: "Антивозрастной крем",
+      brand: "Age Control",
+      price: "6 200",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      category: "face",
+      badge: "Новинка"
     },
     {
-      title: "Инъекции красоты",
-      description: "Биоревитализация и мезотерапия",
-      icon: "Syringe",
-      price: "от 8 000 ₽"
+      id: 4,
+      name: "Масло для тела",
+      brand: "Body Care Pro",
+      price: "2 900",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      category: "body"
     },
     {
-      title: "Лазерные процедуры",
-      description: "Омоложение и удаление пигментации",
-      icon: "Zap",
-      price: "от 6 000 ₽"
+      id: 5,
+      name: "Восстанавливающая маска",
+      brand: "Hair Expert",
+      price: "3 400",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      category: "hair"
     },
     {
-      title: "Уходовые процедуры",
-      description: "Индивидуальные программы ухода",
-      icon: "Star",
-      price: "от 4 500 ₽"
+      id: 6,
+      name: "Профессиональный пилинг",
+      brand: "Salon Line",
+      price: "5 800",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      category: "professional",
+      badge: "Новинка"
     }
   ];
 
-  const specialists = [
-    {
-      name: "Анна Смирнова",
-      role: "Врач-дерматолог",
-      experience: "15 лет опыта",
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/6dcae53c-26d6-4fa9-87b6-bf81a8b96ea5.jpg"
-    },
-    {
-      name: "Елена Волкова",
-      role: "Косметолог-эстетист",
-      experience: "12 лет опыта",
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/6dcae53c-26d6-4fa9-87b6-bf81a8b96ea5.jpg"
-    },
-    {
-      name: "Мария Петрова",
-      role: "Специалист по инъекциям",
-      experience: "10 лет опыта",
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/6dcae53c-26d6-4fa9-87b6-bf81a8b96ea5.jpg"
-    }
+  const brands = [
+    "Luxury Cosmetics",
+    "Professional Care",
+    "Age Control",
+    "Body Care Pro",
+    "Hair Expert",
+    "Salon Line"
   ];
 
   const advantages = [
     {
-      icon: "Award",
-      title: "Опытные специалисты",
-      text: "Врачи с медицинским образованием и международными сертификатами"
+      icon: "ShieldCheck",
+      title: "Сертифицированная продукция",
+      text: "Только оригинальная косметика от проверенных производителей"
     },
     {
-      icon: "Shield",
-      title: "Безопасность",
-      text: "Только сертифицированные препараты и современное оборудование"
+      icon: "Truck",
+      title: "Быстрая доставка",
+      text: "Доставка по всей России. Москва — от 1 дня"
     },
     {
-      icon: "Clock",
-      title: "Удобное время",
-      text: "Работаем без выходных с 9:00 до 21:00"
+      icon: "Headphones",
+      title: "Поддержка 24/7",
+      text: "Консультация профессиональных косметологов"
     },
     {
-      icon: "Users",
-      title: "Индивидуальный подход",
-      text: "Персональные программы ухода для каждого клиента"
+      icon: "Gift",
+      title: "Бонусная программа",
+      text: "Накопительные скидки и подарки постоянным клиентам"
     }
   ];
 
-  const reviews = [
-    {
-      name: "Екатерина",
-      text: "Прекрасная клиника! Профессиональный подход, приятная атмосфера. Результат превзошел все ожидания!",
-      rating: 5
-    },
-    {
-      name: "Ольга",
-      text: "Хожу к Анне на процедуры уже год. Кожа стала значительно лучше, мелкие морщинки разгладились.",
-      rating: 5
-    },
-    {
-      name: "Мария",
-      text: "Очень довольна результатом после курса биоревитализации. Рекомендую всем своим подругам!",
-      rating: 5
-    }
-  ];
+  const filteredProducts = selectedCategory === "all" 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-white">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-beauty-beige">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Icon name="Sparkles" className="text-primary" size={28} />
-            <span className="font-heading text-2xl font-semibold text-beauty-dark">
-              Beauty Clinic
-            </span>
+    <div className="min-h-screen bg-cosmetic-light">
+      <header className="bg-white border-b border-cosmetic-beige sticky top-0 z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-3">
+              <Icon name="Sparkles" className="text-primary" size={32} />
+              <div>
+                <div className="font-heading text-2xl font-bold text-cosmetic-dark">
+                  COSMETIC STAR
+                </div>
+                <div className="text-xs text-cosmetic-gray">Профессиональная косметика</div>
+              </div>
+            </div>
+
+            <div className="hidden lg:flex items-center gap-6">
+              <a href="#catalog" className="text-sm text-cosmetic-dark hover:text-primary transition">Каталог</a>
+              <a href="#brands" className="text-sm text-cosmetic-dark hover:text-primary transition">Бренды</a>
+              <a href="#about" className="text-sm text-cosmetic-dark hover:text-primary transition">О нас</a>
+              <a href="#delivery" className="text-sm text-cosmetic-dark hover:text-primary transition">Доставка</a>
+              <a href="#contacts" className="text-sm text-cosmetic-dark hover:text-primary transition">Контакты</a>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="icon" className="relative">
+                <Icon name="Search" size={20} />
+              </Button>
+              <Button variant="ghost" size="icon" className="relative">
+                <Icon name="Heart" size={20} />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center">
+                  2
+                </span>
+              </Button>
+              <Button variant="ghost" size="icon" className="relative">
+                <Icon name="ShoppingCart" size={20} />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center">
+                  3
+                </span>
+              </Button>
+              <Button variant="ghost" size="icon">
+                <Icon name="User" size={20} />
+              </Button>
+            </div>
           </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm text-beauty-gray hover:text-primary transition">Услуги</a>
-            <a href="#about" className="text-sm text-beauty-gray hover:text-primary transition">О нас</a>
-            <a href="#specialists" className="text-sm text-beauty-gray hover:text-primary transition">Специалисты</a>
-            <a href="#reviews" className="text-sm text-beauty-gray hover:text-primary transition">Отзывы</a>
-            <a href="#contacts" className="text-sm text-beauty-gray hover:text-primary transition">Контакты</a>
-          </nav>
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            Записаться
-          </Button>
         </div>
       </header>
 
-      <section className="pt-32 pb-20 bg-gradient-to-br from-beauty-beige via-white to-beauty-beige">
+      <section className="relative bg-gradient-to-br from-cosmetic-cream via-white to-cosmetic-beige py-20">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="font-heading text-5xl md:text-6xl font-bold text-beauty-dark mb-6 leading-tight">
-                Ваша естественная красота
+              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
+                <span className="text-sm text-primary font-medium">Космецевтика для профессионалов</span>
+              </div>
+              <h1 className="font-heading text-5xl lg:text-6xl font-bold text-cosmetic-dark mb-6 leading-tight">
+                Профессиональная косметика премиум-класса
               </h1>
-              <p className="text-lg text-beauty-gray mb-8 leading-relaxed">
-                Профессиональные косметологические услуги с заботой о вашей коже. 
-                Современные методики и индивидуальный подход к каждому клиенту.
+              <p className="text-lg text-cosmetic-gray mb-8 leading-relaxed">
+                Широкий ассортимент косметики для салонов красоты и профессионального использования. 
+                Доставка по России, консультации специалистов, гарантия качества.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Записаться на консультацию
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
+                  Перейти в каталог
                 </Button>
-                <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
+                <Button size="lg" variant="outline" className="border-cosmetic-dark text-cosmetic-dark hover:bg-cosmetic-dark hover:text-white">
                   <Icon name="Phone" className="mr-2" size={18} />
-                  +7 (495) 123-45-67
+                  8 (800) 333-03-45
                 </Button>
               </div>
             </div>
             <div className="relative">
               <img 
-                src="https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/e73c7474-fc20-469f-a01a-674858786d85.jpg" 
-                alt="Beauty Clinic" 
-                className="rounded-2xl shadow-2xl w-full object-cover"
+                src="https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/02a91104-6689-471a-bca5-339b3e3f1dbd.jpg" 
+                alt="Профессиональная косметика" 
+                className="rounded-3xl shadow-2xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg border border-beauty-beige">
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-cosmetic-beige">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Icon name="Award" className="text-primary" size={24} />
+                  <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Icon name="Award" className="text-primary" size={28} />
                   </div>
                   <div>
-                    <div className="font-semibold text-beauty-dark">2000+</div>
-                    <div className="text-sm text-beauty-gray">Довольных клиентов</div>
+                    <div className="text-2xl font-bold text-cosmetic-dark">15+</div>
+                    <div className="text-sm text-cosmetic-gray">лет на рынке</div>
                   </div>
                 </div>
               </div>
@@ -172,36 +198,110 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="services" className="py-20 bg-white">
+      <section id="catalog" className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-beauty-dark mb-4">
-              Наши услуги
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-cosmetic-dark mb-4">
+              Каталог продукции
             </h2>
-            <p className="text-beauty-gray text-lg max-w-2xl mx-auto">
-              Широкий спектр косметологических процедур для решения любых задач
+            <p className="text-cosmetic-gray text-lg max-w-2xl mx-auto">
+              Профессиональная косметика для салонов и домашнего ухода
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
+
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-6 py-3 rounded-full transition-all ${
+                  selectedCategory === cat.id
+                    ? 'bg-primary text-white shadow-lg'
+                    : 'bg-cosmetic-cream text-cosmetic-dark hover:bg-cosmetic-beige'
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product) => (
+              <div 
+                key={product.id}
+                className="group bg-white rounded-2xl overflow-hidden border border-cosmetic-beige hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="relative overflow-hidden aspect-square bg-cosmetic-cream">
+                  {product.badge && (
+                    <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-primary text-white text-xs font-medium rounded-full">
+                      {product.badge}
+                    </div>
+                  )}
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Button size="icon" variant="secondary" className="rounded-full shadow-lg">
+                      <Icon name="Heart" size={18} />
+                    </Button>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="text-xs text-cosmetic-gray mb-2">{product.brand}</div>
+                  <h3 className="font-semibold text-lg text-cosmetic-dark mb-4 group-hover:text-primary transition">
+                    {product.name}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-2xl font-bold text-cosmetic-dark">
+                        {product.price} ₽
+                      </div>
+                      {product.oldPrice && (
+                        <div className="text-sm text-cosmetic-gray line-through">
+                          {product.oldPrice} ₽
+                        </div>
+                      )}
+                    </div>
+                    <Button className="bg-primary hover:bg-primary/90 text-white">
+                      <Icon name="ShoppingCart" size={18} />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
+              Показать больше товаров
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section id="brands" className="py-20 bg-cosmetic-cream">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-cosmetic-dark mb-4">
+              Премиальные бренды
+            </h2>
+            <p className="text-cosmetic-gray text-lg">
+              Работаем только с проверенными производителями
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {brands.map((brand, index) => (
               <div 
                 key={index}
-                className="group p-8 rounded-2xl border border-beauty-beige hover:border-primary transition-all hover:shadow-xl cursor-pointer bg-white"
-                onMouseEnter={() => setActiveService(index)}
-                onMouseLeave={() => setActiveService(null)}
+                className="bg-white rounded-xl p-8 flex items-center justify-center hover:shadow-xl transition-all cursor-pointer group"
               >
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-colors ${activeService === index ? 'bg-primary' : 'bg-beauty-beige'}`}>
-                  <Icon 
-                    name={service.icon} 
-                    className={`transition-colors ${activeService === index ? 'text-primary-foreground' : 'text-primary'}`}
-                    size={28} 
-                  />
-                </div>
-                <h3 className="font-semibold text-xl text-beauty-dark mb-2">{service.title}</h3>
-                <p className="text-beauty-gray mb-4">{service.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-primary font-semibold">{service.price}</span>
-                  <Icon name="ArrowRight" className="text-primary group-hover:translate-x-2 transition-transform" size={20} />
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-cosmetic-beige rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary transition">
+                    <Icon name="Sparkles" className="text-primary group-hover:text-white transition" size={24} />
+                  </div>
+                  <div className="text-xs font-medium text-cosmetic-dark">{brand}</div>
                 </div>
               </div>
             ))}
@@ -209,35 +309,31 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="about" className="py-20 bg-gradient-to-br from-beauty-beige/30 to-white">
+      <section id="about" className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <img 
-              src="https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/99e3cdfc-102a-4579-9d39-a530417231aa.jpg" 
-              alt="О клинике" 
-              className="rounded-2xl shadow-xl w-full object-cover"
+              src="https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/dd410016-8c0c-400b-8fd9-6dd97d8856ce.jpg" 
+              alt="О нас" 
+              className="rounded-3xl shadow-xl"
             />
             <div>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-beauty-dark mb-6">
-                О нашей клинике
+              <h2 className="font-heading text-4xl lg:text-5xl font-bold text-cosmetic-dark mb-6">
+                Почему выбирают нас?
               </h2>
-              <p className="text-beauty-gray text-lg mb-6 leading-relaxed">
-                Beauty Clinic — это современная косметологическая клиника, где каждый клиент 
-                получает профессиональный уход и индивидуальный подход.
+              <p className="text-cosmetic-gray text-lg mb-8 leading-relaxed">
+                Cosmetic Star — лидер на рынке профессиональной косметики. Мы предлагаем 
+                широкий ассортимент продукции для салонов красоты, спа-центров и домашнего ухода.
               </p>
-              <p className="text-beauty-gray text-lg mb-8 leading-relaxed">
-                Мы используем только проверенные методики и сертифицированные препараты, 
-                обеспечивая безопасность и эффективность всех процедур.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid sm:grid-cols-2 gap-6">
                 {advantages.map((adv, index) => (
-                  <div key={index} className="flex gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Icon name={adv.icon} className="text-primary" size={20} />
+                  <div key={index} className="flex gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Icon name={adv.icon} className="text-primary" size={24} />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-beauty-dark mb-1">{adv.title}</h4>
-                      <p className="text-sm text-beauty-gray">{adv.text}</p>
+                      <h4 className="font-semibold text-cosmetic-dark mb-2">{adv.title}</h4>
+                      <p className="text-sm text-cosmetic-gray leading-relaxed">{adv.text}</p>
                     </div>
                   </div>
                 ))}
@@ -247,191 +343,134 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="specialists" className="py-20 bg-white">
+      <section id="delivery" className="py-20 bg-gradient-to-br from-cosmetic-beige to-cosmetic-cream">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-beauty-dark mb-4">
-              Наши специалисты
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-cosmetic-dark mb-6">
+              Доставка и оплата
             </h2>
-            <p className="text-beauty-gray text-lg max-w-2xl mx-auto">
-              Команда профессионалов с медицинским образованием и большим опытом работы
+            <p className="text-cosmetic-gray text-lg mb-12">
+              Удобные способы доставки и оплаты для вашего комфорта
             </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {specialists.map((spec, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-6 overflow-hidden rounded-2xl">
-                  <img 
-                    src={spec.image} 
-                    alt={spec.name} 
-                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-beauty-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Icon name="Truck" className="text-primary" size={32} />
                 </div>
-                <h3 className="font-semibold text-xl text-beauty-dark mb-2">{spec.name}</h3>
-                <p className="text-primary mb-1">{spec.role}</p>
-                <p className="text-beauty-gray text-sm">{spec.experience}</p>
+                <h3 className="font-semibold text-xl text-cosmetic-dark mb-3">Курьерская доставка</h3>
+                <p className="text-cosmetic-gray">Доставка по Москве от 1 дня. По России 3-7 дней.</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-primary/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl p-12 shadow-lg border border-beauty-beige">
-            <div className="text-center mb-8">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-beauty-dark mb-4">
-                Прайс-лист основных услуг
-              </h2>
-              <p className="text-beauty-gray">Цены указаны в рублях. Точную стоимость уточняйте у администратора.</p>
-            </div>
-            <div className="space-y-4">
-              {[
-                { name: "Консультация косметолога", price: "Бесплатно" },
-                { name: "Чистка лица комбинированная", price: "3 500 - 5 000" },
-                { name: "Массаж лица классический", price: "4 000" },
-                { name: "Пилинг химический", price: "5 000 - 8 000" },
-                { name: "Биоревитализация", price: "8 000 - 15 000" },
-                { name: "Мезотерапия лица", price: "7 000 - 12 000" },
-                { name: "Лазерное омоложение", price: "6 000 - 10 000" },
-                { name: "Уходовая процедура", price: "4 500 - 7 000" }
-              ].map((item, index) => (
-                <div key={index} className="flex justify-between items-center py-4 border-b border-beauty-beige last:border-0">
-                  <span className="text-beauty-dark font-medium">{item.name}</span>
-                  <span className="text-primary font-semibold">{item.price} ₽</span>
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Icon name="MapPin" className="text-primary" size={32} />
                 </div>
-              ))}
+                <h3 className="font-semibold text-xl text-cosmetic-dark mb-3">Пункты выдачи</h3>
+                <p className="text-cosmetic-gray">Более 5000 пунктов выдачи по всей России.</p>
+              </div>
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Icon name="CreditCard" className="text-primary" size={32} />
+                </div>
+                <h3 className="font-semibold text-xl text-cosmetic-dark mb-3">Удобная оплата</h3>
+                <p className="text-cosmetic-gray">Онлайн, наличными или картой при получении.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="reviews" className="py-20 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-beauty-dark mb-4">
-              Отзывы клиентов
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-cosmetic-dark mb-6">
+              Подпишитесь на рассылку
             </h2>
-            <p className="text-beauty-gray text-lg max-w-2xl mx-auto">
-              Нам доверяют тысячи клиентов по всей Москве
+            <p className="text-cosmetic-gray text-lg mb-8">
+              Получайте новости о новинках и специальных предложениях
             </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {reviews.map((review, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-beauty-beige/30 border border-beauty-beige">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Icon key={i} name="Star" className="text-primary fill-primary" size={18} />
-                  ))}
-                </div>
-                <p className="text-beauty-gray mb-6 leading-relaxed">"{review.text}"</p>
-                <div className="font-semibold text-beauty-dark">{review.name}</div>
-              </div>
-            ))}
+            <div className="flex gap-3 max-w-md mx-auto">
+              <Input 
+                type="email" 
+                placeholder="Ваш email"
+                className="flex-1 border-cosmetic-beige focus:border-primary"
+              />
+              <Button className="bg-primary hover:bg-primary/90 text-white">
+                Подписаться
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="contacts" className="py-20 bg-gradient-to-br from-beauty-beige via-white to-beauty-beige">
+      <footer id="contacts" className="bg-cosmetic-dark text-white py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-beauty-dark mb-4">
-                Контакты
-              </h2>
-              <p className="text-beauty-gray text-lg">
-                Запишитесь на консультацию прямо сейчас
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="Sparkles" className="text-primary" size={28} />
+                <span className="font-heading text-xl font-bold">COSMETIC STAR</span>
+              </div>
+              <p className="text-gray-400 text-sm mb-4">
+                Профессиональная косметика премиум-класса для салонов и домашнего ухода.
               </p>
+              <div className="flex gap-3">
+                <a href="#" className="w-10 h-10 bg-white/10 hover:bg-primary rounded-full flex items-center justify-center transition">
+                  <Icon name="Instagram" size={18} />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white/10 hover:bg-primary rounded-full flex items-center justify-center transition">
+                  <Icon name="Facebook" size={18} />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white/10 hover:bg-primary rounded-full flex items-center justify-center transition">
+                  <Icon name="Youtube" size={18} />
+                </a>
+              </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon name="MapPin" className="text-primary" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-beauty-dark mb-1">Адрес</h4>
-                    <p className="text-beauty-gray">г. Москва, ул. Пушкина, д. 10</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon name="Phone" className="text-primary" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-beauty-dark mb-1">Телефон</h4>
-                    <p className="text-beauty-gray">+7 (495) 123-45-67</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon name="Mail" className="text-primary" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-beauty-dark mb-1">Email</h4>
-                    <p className="text-beauty-gray">info@beautyclinic.ru</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon name="Clock" className="text-primary" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-beauty-dark mb-1">Режим работы</h4>
-                    <p className="text-beauty-gray">Ежедневно с 9:00 до 21:00</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-2xl shadow-lg border border-beauty-beige">
-                <h3 className="font-semibold text-xl text-beauty-dark mb-6">Записаться на прием</h3>
-                <form className="space-y-4">
-                  <input 
-                    type="text" 
-                    placeholder="Ваше имя" 
-                    className="w-full px-4 py-3 rounded-lg border border-beauty-beige focus:border-primary focus:outline-none transition"
-                  />
-                  <input 
-                    type="tel" 
-                    placeholder="Телефон" 
-                    className="w-full px-4 py-3 rounded-lg border border-beauty-beige focus:border-primary focus:outline-none transition"
-                  />
-                  <textarea 
-                    placeholder="Комментарий" 
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-beauty-beige focus:border-primary focus:outline-none transition resize-none"
-                  />
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                    Отправить заявку
-                  </Button>
-                </form>
-              </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Каталог</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><a href="#" className="hover:text-primary transition">Уход за лицом</a></li>
+                <li><a href="#" className="hover:text-primary transition">Уход за телом</a></li>
+                <li><a href="#" className="hover:text-primary transition">Уход за волосами</a></li>
+                <li><a href="#" className="hover:text-primary transition">Профессиональная косметика</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Информация</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><a href="#" className="hover:text-primary transition">О компании</a></li>
+                <li><a href="#" className="hover:text-primary transition">Доставка и оплата</a></li>
+                <li><a href="#" className="hover:text-primary transition">Гарантии</a></li>
+                <li><a href="#" className="hover:text-primary transition">Контакты</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Контакты</h4>
+              <ul className="space-y-3 text-sm text-gray-400">
+                <li className="flex items-center gap-2">
+                  <Icon name="Phone" size={16} />
+                  <span>8 (800) 333-03-45</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  <span>info@cosmeticstar.ru</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon name="MapPin" size={16} className="mt-1" />
+                  <span>Москва, ул. Профессиональная, 25</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Icon name="Clock" size={16} />
+                  <span>Пн-Вс: 9:00 - 21:00</span>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
-
-      <footer className="py-12 bg-beauty-dark text-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <Icon name="Sparkles" className="text-primary" size={24} />
-              <span className="font-heading text-xl font-semibold">Beauty Clinic</span>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-gray-400 text-sm">© 2024 Beauty Clinic. Все права защищены.</p>
-            </div>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-primary transition flex items-center justify-center">
-                <Icon name="Instagram" size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-primary transition flex items-center justify-center">
-                <Icon name="Facebook" size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-primary transition flex items-center justify-center">
-                <Icon name="Phone" size={18} />
-              </a>
-            </div>
+          
+          <div className="pt-8 border-t border-white/10 text-center text-sm text-gray-400">
+            <p>© 2024 Cosmetic Star. Все права защищены. Профессиональная косметика премиум-класса.</p>
           </div>
         </div>
       </footer>

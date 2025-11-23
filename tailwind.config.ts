@@ -29,24 +29,24 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#d4a574',
-					foreground: '#1a1a1a'
+					DEFAULT: '#c9a07c',
+					foreground: '#ffffff'
 				},
 				secondary: {
-					DEFAULT: '#f5e6d3',
-					foreground: '#1a1a1a'
+					DEFAULT: '#f8f5f0',
+					foreground: '#2d2d2d'
 				},
 				destructive: {
 					DEFAULT: '#ef4444',
 					foreground: '#ffffff'
 				},
 				muted: {
-					DEFAULT: '#f9fafb',
-					foreground: '#6b7280'
+					DEFAULT: '#fafaf9',
+					foreground: '#737373'
 				},
 				accent: {
-					DEFAULT: '#d4a574',
-					foreground: '#1a1a1a'
+					DEFAULT: '#c9a07c',
+					foreground: '#ffffff'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -59,18 +59,20 @@ export default {
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: '#d4a574',
-					'primary-foreground': '#1a1a1a',
-					accent: '#d4a574',
-					'accent-foreground': '#1a1a1a',
+					primary: '#c9a07c',
+					'primary-foreground': '#ffffff',
+					accent: '#c9a07c',
+					'accent-foreground': '#ffffff',
 					border: 'hsl(var(--sidebar-border))',
-					ring: '#d4a574'
+					ring: '#c9a07c'
 				},
-				beauty: {
-					gold: '#d4a574',
-					beige: '#f5e6d3',
-					dark: '#1a1a1a',
-					gray: '#6b7280'
+				cosmetic: {
+					gold: '#c9a07c',
+					cream: '#f8f5f0',
+					beige: '#e8dfd3',
+					dark: '#2d2d2d',
+					gray: '#737373',
+					light: '#fafaf9'
 				}
 			},
 			borderRadius: {

@@ -145,14 +145,14 @@ const Index = () => {
                 <a 
                   key={index} 
                   href={item.href}
-                  className="text-vt-gray-600 hover:text-vt-black transition"
+                  className="text-vt-gray-600 hover:text-vt-green-500 transition"
                 >
                   {item.name}
                 </a>
               ))}
             </nav>
             <div className="flex items-center gap-4">
-              <a href="mailto:info@cosmeticstar.ru" className="text-vt-gray-600 hover:text-vt-black transition">
+              <a href="mailto:info@cosmeticstar.ru" className="text-vt-gray-600 hover:text-vt-green-500 transition">
                 info@cosmeticstar.ru
               </a>
               <Button variant="ghost" size="sm" className="text-xs">
@@ -168,7 +168,7 @@ const Index = () => {
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-2">
-                <Icon name="Sparkles" className="text-vt-black" size={28} />
+                <Icon name="Sparkles" className="text-vt-green-500" size={28} />
                 <div className="font-semibold text-xl tracking-tight">VT COSMETICS</div>
               </div>
 
@@ -176,7 +176,7 @@ const Index = () => {
                 <div className="relative">
                   <Button 
                     variant="outline" 
-                    className="border-vt-black text-vt-black hover:bg-vt-black hover:text-white"
+                    className="border-vt-green-500 text-vt-green-500 hover:bg-vt-green-600 hover:text-white"
                     onMouseEnter={() => setShowCatalog(true)}
                     onMouseLeave={() => setShowCatalog(false)}
                   >
@@ -204,7 +204,7 @@ const Index = () => {
                   )}
                 </div>
                 
-                <Button variant="ghost" className="text-vt-black">
+                <Button variant="ghost" className="text-vt-green-500">
                   Бренды
                 </Button>
               </div>
@@ -214,7 +214,7 @@ const Index = () => {
               <div className="relative">
                 <Input 
                   placeholder="Поиск товаров..."
-                  className="pr-10 border-vt-gray-300 focus:border-vt-black"
+                  className="pr-10 border-vt-gray-300 focus:border-vt-green-500"
                 />
                 <Icon 
                   name="Search" 
@@ -231,7 +231,7 @@ const Index = () => {
               <Button variant="ghost" size="icon" className="relative">
                 <Icon name="ShoppingCart" size={22} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-vt-black text-white text-xs rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-vt-green-500 text-white text-xs rounded-full flex items-center justify-center">
                     {cartCount}
                   </span>
                 )}
@@ -253,8 +253,8 @@ const Index = () => {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`text-sm font-medium pb-2 transition-all ${
                   selectedCategory === cat.id
-                    ? 'text-vt-black border-b-2 border-vt-black'
-                    : 'text-vt-gray-600 hover:text-vt-black'
+                    ? 'text-vt-green-500 border-b-2 border-vt-green-500'
+                    : 'text-vt-gray-600 hover:text-vt-green-500'
                 }`}
               >
                 {cat.name}
@@ -266,11 +266,11 @@ const Index = () => {
             {filteredProducts.map((product) => (
               <div 
                 key={product.id}
-                className="group bg-white border border-vt-gray-200 hover:border-vt-black transition-all cursor-pointer"
+                className="group bg-white border border-vt-gray-200 hover:border-vt-green-500 transition-all cursor-pointer"
               >
                 <div className="relative aspect-square bg-vt-gray-100 overflow-hidden">
                   {product.badge && (
-                    <Badge className="absolute top-3 left-3 z-10 bg-vt-black text-white text-xs">
+                    <Badge className="absolute top-3 left-3 z-10 bg-vt-green-500 text-white text-xs">
                       {product.badge}
                     </Badge>
                   )}
@@ -285,7 +285,7 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button className="w-full bg-vt-black hover:bg-vt-gray-800 text-white text-sm">
+                    <Button className="w-full bg-vt-green-500 hover:bg-vt-green-600 text-white text-sm">
                       В корзину
                     </Button>
                   </div>
@@ -293,7 +293,7 @@ const Index = () => {
                 
                 <div className="p-4">
                   <div className="text-xs text-vt-gray-600 mb-1">{product.brand}</div>
-                  <h3 className="text-sm font-medium text-vt-black mb-2 line-clamp-2">
+                  <h3 className="text-sm font-medium text-vt-green-500 mb-2 line-clamp-2">
                     {product.name}
                   </h3>
                   
@@ -315,7 +315,7 @@ const Index = () => {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-lg font-semibold text-vt-black">
+                      <div className="text-lg font-semibold text-vt-green-500">
                         {product.price} ₽
                       </div>
                       {product.oldPrice && (
@@ -341,7 +341,7 @@ const Index = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="border-vt-black text-vt-black hover:bg-vt-black hover:text-white"
+              className="border-vt-green-500 text-vt-green-500 hover:bg-vt-green-600 hover:text-white"
             >
               Показать ещё
             </Button>
@@ -356,9 +356,9 @@ const Index = () => {
             {brands.map((brand, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-center p-8 border border-vt-gray-200 hover:border-vt-black transition cursor-pointer"
+                className="flex items-center justify-center p-8 border border-vt-gray-200 hover:border-vt-green-500 transition cursor-pointer"
               >
-                <span className="text-sm font-medium text-vt-black text-center">{brand}</span>
+                <span className="text-sm font-medium text-vt-green-500 text-center">{brand}</span>
               </div>
             ))}
           </div>
@@ -375,7 +375,7 @@ const Index = () => {
           
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-vt-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-vt-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="ShieldCheck" size={28} />
               </div>
               <h3 className="font-semibold mb-2">100% оригинал</h3>
@@ -383,7 +383,7 @@ const Index = () => {
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-vt-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-vt-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Truck" size={28} />
               </div>
               <h3 className="font-semibold mb-2">Быстрая доставка</h3>
@@ -391,7 +391,7 @@ const Index = () => {
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-vt-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-vt-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Gift" size={28} />
               </div>
               <h3 className="font-semibold mb-2">Подарки</h3>
@@ -399,7 +399,7 @@ const Index = () => {
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-vt-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-vt-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Headphones" size={28} />
               </div>
               <h3 className="font-semibold mb-2">Поддержка 24/7</h3>
@@ -420,9 +420,9 @@ const Index = () => {
               <Input 
                 type="email" 
                 placeholder="Ваш email"
-                className="flex-1 border-vt-gray-300 focus:border-vt-black"
+                className="flex-1 border-vt-gray-300 focus:border-vt-green-500"
               />
-              <Button className="bg-vt-black hover:bg-vt-gray-800 text-white px-8">
+              <Button className="bg-vt-green-500 hover:bg-vt-green-600 text-white px-8">
                 Подписаться
               </Button>
             </div>
@@ -430,7 +430,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="bg-vt-black text-white py-12">
+      <footer className="bg-vt-green-500 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
@@ -438,14 +438,14 @@ const Index = () => {
                 <Icon name="Sparkles" size={24} />
                 <span className="font-semibold text-lg">VT COSMETICS</span>
               </div>
-              <p className="text-sm text-vt-gray-400">
+              <p className="text-sm text-white/80">
                 Официальный дистрибьютор профессиональной косметики премиум-класса
               </p>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Информация</h4>
-              <ul className="space-y-2 text-sm text-vt-gray-400">
+              <ul className="space-y-2 text-sm text-white/80">
                 <li><a href="#" className="hover:text-white transition">О компании</a></li>
                 <li><a href="#" className="hover:text-white transition">Доставка и оплата</a></li>
                 <li><a href="#" className="hover:text-white transition">Возврат товара</a></li>
@@ -455,7 +455,7 @@ const Index = () => {
             
             <div>
               <h4 className="font-semibold mb-4">Каталог</h4>
-              <ul className="space-y-2 text-sm text-vt-gray-400">
+              <ul className="space-y-2 text-sm text-white/80">
                 <li><a href="#" className="hover:text-white transition">Уход за лицом</a></li>
                 <li><a href="#" className="hover:text-white transition">Уход за телом</a></li>
                 <li><a href="#" className="hover:text-white transition">Уход за волосами</a></li>
@@ -465,7 +465,7 @@ const Index = () => {
             
             <div>
               <h4 className="font-semibold mb-4">Контакты</h4>
-              <ul className="space-y-3 text-sm text-vt-gray-400">
+              <ul className="space-y-3 text-sm text-white/80">
                 <li className="flex items-center gap-2">
                   <Icon name="Mail" size={16} />
                   <span>info@cosmeticstar.ru</span>
@@ -482,7 +482,7 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="pt-8 border-t border-vt-gray-800 flex items-center justify-between text-sm text-vt-gray-400">
+          <div className="pt-8 border-t border-white/20 flex items-center justify-between text-sm text-white/80">
             <p>© 2024 VT Cosmetics. Все права защищены.</p>
             <div className="flex gap-4">
               <a href="#" className="hover:text-white transition">

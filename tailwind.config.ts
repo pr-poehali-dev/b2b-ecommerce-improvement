@@ -19,8 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
-				heading: ['Cormorant Garamond', 'serif']
+				sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+				heading: ['Inter', 'ui-sans-serif', 'system-ui']
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -29,23 +29,23 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#c9a07c',
+					DEFAULT: '#111111',
 					foreground: '#ffffff'
 				},
 				secondary: {
-					DEFAULT: '#f8f5f0',
-					foreground: '#2d2d2d'
+					DEFAULT: '#f5f5f5',
+					foreground: '#111111'
 				},
 				destructive: {
 					DEFAULT: '#ef4444',
 					foreground: '#ffffff'
 				},
 				muted: {
-					DEFAULT: '#fafaf9',
-					foreground: '#737373'
+					DEFAULT: '#fafafa',
+					foreground: '#666666'
 				},
 				accent: {
-					DEFAULT: '#c9a07c',
+					DEFAULT: '#111111',
 					foreground: '#ffffff'
 				},
 				popover: {
@@ -59,20 +59,27 @@ export default {
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: '#c9a07c',
+					primary: '#111111',
 					'primary-foreground': '#ffffff',
-					accent: '#c9a07c',
+					accent: '#111111',
 					'accent-foreground': '#ffffff',
 					border: 'hsl(var(--sidebar-border))',
-					ring: '#c9a07c'
+					ring: '#111111'
 				},
-				cosmetic: {
-					gold: '#c9a07c',
-					cream: '#f8f5f0',
-					beige: '#e8dfd3',
-					dark: '#2d2d2d',
-					gray: '#737373',
-					light: '#fafaf9'
+				vt: {
+					black: '#111111',
+					white: '#ffffff',
+					gray: {
+						'100': '#fafafa',
+						'200': '#f5f5f5',
+						'300': '#e5e5e5',
+						'400': '#d4d4d4',
+						'500': '#a3a3a3',
+						'600': '#666666',
+						'700': '#525252',
+						'800': '#404040',
+						'900': '#262626'
+					}
 				}
 			},
 			borderRadius: {

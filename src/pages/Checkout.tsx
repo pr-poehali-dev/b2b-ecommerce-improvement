@@ -4,11 +4,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useCart } from "@/contexts/CartContext";
-import { AddressSuggestions, DaDataSuggestion, DaDataAddress } from 'react-dadata';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import { DaDataSuggestion, DaDataAddress } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
+import DeliveryStep from "@/components/checkout/DeliveryStep";
+import ContactsStep from "@/components/checkout/ContactsStep";
+import PaymentStep from "@/components/checkout/PaymentStep";
+import OrderSummary from "@/components/checkout/OrderSummary";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -207,322 +209,46 @@ const Checkout = () => {
             </div>
 
             {step === 'delivery' && (
-              <div className="bg-white border border-vt-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-vt-green-500 mb-6">Выберите способ доставки</h2>
-                
-                <div className="space-y-4 mb-6">
-                  {deliveryOptions.map((option) => (
-                    <label
-                      key={option.id}
-                      className={`flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition ${
-                        formData.deliveryType === option.id
-                          ? 'border-vt-green-500 bg-vt-green-50'
-                          : 'border-vt-gray-200 hover:border-vt-green-300'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="delivery"
-                        value={option.id}
-                        checked={formData.deliveryType === option.id}
-                        onChange={(e) => handleInputChange('deliveryType', e.target.value)}
-                        className="w-5 h-5 text-vt-green-500"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-1">
-                          <Icon name={option.icon} size={24} className="text-vt-green-500" />
-                          <div className="font-semibold text-vt-gray-900">{option.name}</div>
-                        </div>
-                        <div className="text-sm text-vt-gray-600">{option.description}</div>
-                        <div className="flex items-center gap-4 mt-2 text-sm">
-                          <span className="font-medium text-vt-green-500">{option.price}</span>
-                          <span className="text-vt-gray-500">{option.time}</span>
-                        </div>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-
-                {formData.deliveryType === 'courier' && (
-                  <div className="space-y-4">
-                    <h3 className="font-semibold text-vt-gray-900">Адрес доставки</h3>
-                    <div className="dadata-address-wrapper">
-                      <AddressSuggestions
-                        token="demotoken"
-                        value={addressData}
-                        onChange={handleAddressSelect}
-                        inputProps={{
-                          placeholder: "Начните вводить адрес...",
-                          className: "w-full px-3 py-2 border border-vt-gray-300 rounded-md focus:border-vt-green-500 focus:outline-none focus:ring-1 focus:ring-vt-green-500"
-                        }}
-                        containerClassName="dadata-container"
-                        suggestionsClassName="dadata-suggestions"
-                      />
-                    </div>
-                    <div className="grid grid-cols-3 gap-4">
-                      <Input
-                        placeholder="Квартира"
-                        value={formData.apartment}
-                        onChange={(e) => handleInputChange('apartment', e.target.value)}
-                      />
-                      <Input
-                        placeholder="Подъезд"
-                        value={formData.entrance}
-                        onChange={(e) => handleInputChange('entrance', e.target.value)}
-                      />
-                      <Input
-                        placeholder="Этаж"
-                        value={formData.floor}
-                        onChange={(e) => handleInputChange('floor', e.target.value)}
-                      />
-                    </div>
-                    
-                    <div className="mt-6">
-                      <h3 className="font-semibold text-vt-gray-900 mb-3">Адрес на карте</h3>
-                      <div className="border border-vt-gray-300 rounded-lg overflow-hidden" style={{ height: '400px' }}>
-                        <YMaps query={{ apikey: 'demo', lang: 'ru_RU' }}>
-                          <Map
-                            state={{ center: mapCenter, zoom: mapZoom }}
-                            width="100%"
-                            height="100%"
-                          >
-                            {addressData?.data.geo_lat && addressData?.data.geo_lon && (
-                              <Placemark
-                                geometry={[
-                                  parseFloat(addressData.data.geo_lat),
-                                  parseFloat(addressData.data.geo_lon)
-                                ]}
-                                properties={{
-                                  hintContent: formData.address,
-                                  balloonContent: formData.address
-                                }}
-                                options={{
-                                  preset: 'islands#greenDotIcon'
-                                }}
-                              />
-                            )}
-                          </Map>
-                        </YMaps>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <Button
-                  onClick={() => setStep('contacts')}
-                  className="w-full mt-6 bg-vt-green-500 hover:bg-vt-green-600"
-                >
-                  Продолжить
-                  <Icon name="ArrowRight" size={20} className="ml-2" />
-                </Button>
-              </div>
+              <DeliveryStep
+                deliveryOptions={deliveryOptions}
+                formData={formData}
+                addressData={addressData}
+                mapCenter={mapCenter}
+                mapZoom={mapZoom}
+                onInputChange={handleInputChange}
+                onAddressSelect={handleAddressSelect}
+                onNext={() => setStep('contacts')}
+              />
             )}
 
             {step === 'contacts' && (
-              <div className="bg-white border border-vt-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-vt-green-500 mb-6">Контактные данные</h2>
-                
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-vt-gray-700 mb-2">
-                        Имя <span className="text-red-500">*</span>
-                      </label>
-                      <Input
-                        placeholder="Иван"
-                        value={formData.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-vt-gray-700 mb-2">
-                        Фамилия <span className="text-red-500">*</span>
-                      </label>
-                      <Input
-                        placeholder="Иванов"
-                        value={formData.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-vt-gray-700 mb-2">
-                      Телефон <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      placeholder="+7 (___) ___-__-__"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-vt-gray-700 mb-2">
-                      Email <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="email"
-                      placeholder="example@mail.com"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-vt-gray-700 mb-2">
-                      Комментарий к заказу
-                    </label>
-                    <textarea
-                      placeholder="Дополнительные пожелания"
-                      value={formData.comment}
-                      onChange={(e) => handleInputChange('comment', e.target.value)}
-                      className="w-full px-3 py-2 border border-vt-gray-300 rounded-lg min-h-[100px] resize-none focus:outline-none focus:ring-2 focus:ring-vt-green-500"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex gap-4 mt-6">
-                  <Button
-                    onClick={() => setStep('delivery')}
-                    variant="outline"
-                    className="flex-1"
-                  >
-                    <Icon name="ArrowLeft" size={20} className="mr-2" />
-                    Назад
-                  </Button>
-                  <Button
-                    onClick={() => setStep('payment')}
-                    className="flex-1 bg-vt-green-500 hover:bg-vt-green-600"
-                  >
-                    Продолжить
-                    <Icon name="ArrowRight" size={20} className="ml-2" />
-                  </Button>
-                </div>
-              </div>
+              <ContactsStep
+                formData={formData}
+                onInputChange={handleInputChange}
+                onBack={() => setStep('delivery')}
+                onNext={() => setStep('payment')}
+              />
             )}
 
             {step === 'payment' && (
-              <div className="bg-white border border-vt-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-vt-green-500 mb-6">Способ оплаты</h2>
-                
-                <div className="space-y-4 mb-6">
-                  {paymentOptions.map((option) => (
-                    <label
-                      key={option.id}
-                      className={`flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition ${
-                        formData.paymentMethod === option.id
-                          ? 'border-vt-green-500 bg-vt-green-50'
-                          : 'border-vt-gray-200 hover:border-vt-green-300'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="payment"
-                        value={option.id}
-                        checked={formData.paymentMethod === option.id}
-                        onChange={(e) => handleInputChange('paymentMethod', e.target.value)}
-                        className="w-5 h-5 text-vt-green-500"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-1">
-                          <Icon name={option.icon} size={24} className="text-vt-green-500" />
-                          <div className="font-semibold text-vt-gray-900">{option.name}</div>
-                        </div>
-                        <div className="text-sm text-vt-gray-600">{option.description}</div>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-
-                <div className="bg-vt-gray-50 rounded-lg p-4 mb-6">
-                  <div className="flex items-start gap-3">
-                    <Icon name="Info" size={20} className="text-vt-green-500 mt-0.5" />
-                    <div className="text-sm text-vt-gray-700">
-                      <p className="font-medium mb-1">Безопасная оплата</p>
-                      <p>Все платёжные данные передаются в зашифрованном виде</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button
-                    onClick={() => setStep('contacts')}
-                    variant="outline"
-                    className="flex-1"
-                  >
-                    <Icon name="ArrowLeft" size={20} className="mr-2" />
-                    Назад
-                  </Button>
-                  <Button
-                    onClick={handleSubmitOrder}
-                    className="flex-1 bg-vt-green-500 hover:bg-vt-green-600"
-                  >
-                    <Icon name="Check" size={20} className="mr-2" />
-                    Оформить заказ
-                  </Button>
-                </div>
-              </div>
+              <PaymentStep
+                paymentOptions={paymentOptions}
+                formData={formData}
+                onInputChange={handleInputChange}
+                onBack={() => setStep('contacts')}
+                onSubmit={handleSubmitOrder}
+              />
             )}
           </div>
 
-          <div className="lg:sticky lg:top-4 h-fit">
-            <div className="bg-white border border-vt-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-vt-green-500 mb-4">Ваш заказ</h3>
-              
-              <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="flex gap-3">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-16 h-16 object-cover rounded border border-vt-gray-200"
-                    />
-                    <div className="flex-1">
-                      <div className="font-medium text-sm text-vt-gray-900">{item.name}</div>
-                      <div className="text-xs text-vt-gray-500 mb-1">{item.brand}</div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-vt-gray-600">{item.quantity} шт.</span>
-                        <span className="font-semibold text-vt-green-500">{item.price}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="border-t border-vt-gray-200 pt-4 space-y-3">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-vt-gray-600">Товары ({cartItems.length}):</span>
-                  <span className="font-medium">{total.toLocaleString('ru-RU')} ₽</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-vt-gray-600">Доставка:</span>
-                  <span className="font-medium">
-                    {deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} ₽`}
-                  </span>
-                </div>
-                <div className="border-t border-vt-gray-200 pt-3 flex items-center justify-between">
-                  <span className="text-lg font-semibold text-vt-gray-900">Итого:</span>
-                  <span className="text-2xl font-bold text-vt-green-500">
-                    {(total + deliveryCost).toLocaleString('ru-RU')} ₽
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 bg-vt-gray-50 rounded-lg p-4">
-              <div className="flex items-start gap-3">
-                <Icon name="ShieldCheck" size={20} className="text-vt-green-500 mt-0.5" />
-                <div className="text-xs text-vt-gray-700">
-                  <p className="font-medium mb-1">Гарантия качества</p>
-                  <p>Только оригинальная продукция VT Cosmetics</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <OrderSummary
+            cartItems={cartItems}
+            total={total}
+            deliveryCost={deliveryCost}
+          />
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

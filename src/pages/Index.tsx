@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,7 @@ import Cart from "@/components/Cart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
+import { products as catalogProducts } from "@/data/products";
 
 const Index = () => {
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
@@ -21,167 +22,38 @@ const Index = () => {
     { id: "popular", name: "Популярное" }
   ];
 
-  const products = [
-    {
-      id: 1,
-      name: "Reedle Shot 100",
-      brand: "VT COSMETICS",
-      description: "Ежедневный ночной уход",
-      price: "2 560",
-      oldPrice: "3 200",
-      rating: 4.9,
-      reviews: 999,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/8c617bf9-36ee-4afb-a3d9-eb9b6b3d1237.jpg",
-      category: "bestsellers",
-      badge: "Tarzan PICK",
-      discount: "-20%"
-    },
-    {
-      id: 2,
-      name: "PDRN Essence 100",
-      brand: "VT COSMETICS",
-      description: "Веганская эссенция с экстрактом дикого женьшеня",
-      price: "3 150",
-      oldPrice: "4 500",
-      rating: 4.8,
-      reviews: 453,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/a78561a5-4849-47c2-89ef-a7dd842753e8.jpg",
-      category: "bestsellers",
-      badge: "Annie PICK",
-      discount: "-30%"
-    },
-    {
-      id: 3,
-      name: "PDRN Capsule Cream 100",
-      brand: "VT COSMETICS",
-      description: "PDRN капсулы + увлажняющий гель-крем",
-      price: "2 720",
-      oldPrice: "3 400",
-      rating: 4.7,
-      reviews: 66,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/4c0bdd45-785c-47af-8dfc-990696789aab.jpg",
-      category: "bestsellers",
-      badge: "Youngseo PICK",
-      discount: "-20%"
-    },
-    {
-      id: 4,
-      name: "Glucamune Mask",
-      brand: "VT COSMETICS",
-      description: "Длительное увлажнение и ежедневное успокоение",
-      price: "170",
-      oldPrice: "200",
-      rating: 4.8,
-      reviews: 5,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/a42b157c-b9f3-4728-a8cb-911dcf02459d.jpg",
-      category: "bestsellers",
-      badge: "Бестселлер",
-      discount: "-15%"
-    },
-    {
-      id: 5,
-      name: "Cica Collagen Vibrating Eye Cream",
-      brand: "VT COSMETICS",
-      description: "До 12 000 микровибраций в минуту",
-      price: "2 900",
-      rating: 4.6,
-      reviews: 87,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3ce23259-3d5f-41b7-9f0f-3112dd1a3b98.jpg",
-      category: "new",
-      badge: "Новинка"
-    },
-    {
-      id: 6,
-      name: "Reedle Shot 300",
-      brand: "VT COSMETICS",
-      description: "Интенсивный ночной уход",
-      price: "3 200",
-      oldPrice: "4 000",
-      rating: 4.9,
-      reviews: 542,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/117d0fcb-aea5-4eb0-8828-3513856d8d8c.jpg",
-      category: "bestsellers",
-      badge: "Бестселлер",
-      discount: "-20%"
-    },
-    {
-      id: 7,
-      name: "TX-TONING Toner",
-      brand: "VT COSMETICS",
-      description: "Ежедневное тонирование",
-      price: "1 800",
-      oldPrice: "2 200",
-      rating: 4.7,
-      reviews: 234,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3a9f4077-4a29-45b7-8f01-95dd5b39445a.jpg",
-      category: "discounts",
-      discount: "-18%"
-    },
-    {
-      id: 8,
-      name: "GLUCAMUNE Water Glow Serum",
-      brand: "VT COSMETICS",
-      description: "Низкораздражающий увлажняющий уход",
-      price: "2 400",
-      rating: 4.9,
-      reviews: 142,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3f944756-0933-4258-8a18-ec51ce854c21.jpg",
-      category: "new",
-      badge: "Новинка"
-    },
-    {
-      id: 9,
-      name: "Cica Daily Soothing Mask",
-      brand: "VT COSMETICS",
-      description: "Ежедневное успокоение и увлажнение",
-      price: "150",
-      oldPrice: "180",
-      rating: 4.8,
-      reviews: 321,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/a061e003-a7fd-4d45-bd94-f1ae568502a7.jpg",
-      category: "bestsellers",
-      discount: "-17%"
-    },
-    {
-      id: 10,
-      name: "Reedle Shot 700",
-      brand: "VT COSMETICS",
-      description: "Максимальная интенсивность",
-      price: "4 000",
-      oldPrice: "5 000",
-      rating: 4.9,
-      reviews: 267,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3b07222c-b397-4ec5-a1fc-30e87172a5b7.jpg",
-      category: "new",
-      badge: "Новинка",
-      discount: "-20%"
-    },
-    {
-      id: 11,
-      name: "PDRN 100 Sun Cream",
-      brand: "VT COSMETICS",
-      description: "Солнцезащитный крем с PDRN",
-      price: "1 900",
-      rating: 4.7,
-      reviews: 98,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/cc62f59c-8382-4a98-adab-03709064c8c5.jpg",
-      category: "popular"
-    },
-    {
-      id: 12,
-      name: "Cica Cleansing Foam",
-      brand: "VT COSMETICS",
-      description: "Мягкая очищающая пенка",
-      price: "1 200",
-      oldPrice: "1 500",
-      rating: 4.6,
-      reviews: 445,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/96f5df3e-3566-4963-bf2b-c480529c4739.jpg",
-      category: "discounts",
-      badge: "Скидка",
-      discount: "-20%"
-    }
-  ];
+  const products = useMemo(() => {
+    const shuffled = [...catalogProducts].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 12);
+    
+    return selected.map((p, index) => {
+      const categories = ['bestsellers', 'new', 'discounts', 'popular'];
+      const assignedCategory = categories[index % categories.length];
+      const hasDiscount = Math.random() > 0.5;
+      const discountPercent = hasDiscount ? [10, 15, 20, 25, 30][Math.floor(Math.random() * 5)] : 0;
+      const oldPrice = hasDiscount ? Math.floor(p.price * (1 + discountPercent / 100)) : undefined;
+      const rating = (4.5 + Math.random() * 0.5).toFixed(1);
+      const reviews = Math.floor(Math.random() * 800) + 50;
+      
+      const badges = p.isHit ? ['Бестселлер', 'ХИТ'] : (p.isNew ? ['Новинка'] : ['']);
+      const badge = badges[Math.floor(Math.random() * badges.length)];
+      
+      return {
+        id: p.id,
+        name: p.name,
+        brand: 'VT COSMETICS',
+        description: p.volume,
+        price: p.price.toString(),
+        oldPrice: oldPrice?.toString(),
+        rating: parseFloat(rating),
+        reviews,
+        image: p.image,
+        category: assignedCategory,
+        badge: badge || undefined,
+        discount: hasDiscount ? `-${discountPercent}%` : undefined
+      };
+    });
+  }, []);
 
   const brands = ["VT COSMETICS", "HOLY LAND", "GIGI", "Christina", "Anna Lotan", "Dermalogica"];
 
@@ -189,7 +61,7 @@ const Index = () => {
     ? products 
     : products.filter(p => p.category === selectedCategory);
 
-  const addToCart = (product: typeof products[0]) => {
+  const addToCart = (product: { id: number; name: string; brand: string; price: string; image: string }) => {
     addToCartContext({
       id: product.id,
       name: product.name,

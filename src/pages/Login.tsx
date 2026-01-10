@@ -43,7 +43,7 @@ const Login = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="admin"
+              placeholder="Введите логин"
               className="w-full"
               required
             />
@@ -57,7 +57,7 @@ const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="Введите пароль"
               className="w-full"
               required
             />

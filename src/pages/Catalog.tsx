@@ -7,43 +7,26 @@ import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { products, productLines, categories } from "@/data/products";
 import { useCatalogFilters } from "@/hooks/useCatalogFilters";
+import { useCart } from "@/contexts/CartContext";
 
 const Catalog = () => {
-  const [cartItems, setCartItems] = useState<Array<{id: number; name: string; brand: string; price: string; image: string; quantity: number}>>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { selectedCategory, selectedLine, setSelectedCategory, setSelectedLine } = useCatalogFilters();
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000 });
   const [showNewOnly, setShowNewOnly] = useState(false);
-
-  const updateQuantity = (id: number, quantity: number) => {
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
-  };
+  const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
 
   const addToCart = (productId: number) => {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
-    const existingItem = cartItems.find(item => item.id === productId);
-    if (existingItem) {
-      updateQuantity(productId, existingItem.quantity + 1);
-    } else {
-      setCartItems(prev => [...prev, {
-        id: product.id,
-        name: product.name,
-        brand: "VT Cosmetics",
-        price: `${product.price} ₽`,
-        image: product.image,
-        quantity: 1
-      }]);
-    }
+    addToCartContext({
+      id: product.id,
+      name: product.name,
+      brand: "VT Cosmetics",
+      price: `${product.price} ₽`,
+      image: product.image
+    });
   };
 
   const filteredProducts = products.filter(product => {
@@ -71,7 +54,7 @@ const Catalog = () => {
         onRemoveItem={removeItem}
       />
       <Header 
-        cartItemsCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+        cartItemsCount={getTotalItems()}
         onCartClick={() => setIsCartOpen(true)}
       />
 

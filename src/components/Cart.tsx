@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
@@ -21,6 +22,8 @@ interface CartProps {
 }
 
 const Cart = ({ isOpen, onClose, items, onUpdateQuantity, onRemoveItem }: CartProps) => {
+  const navigate = useNavigate();
+  
   const calculateTotal = () => {
     return items.reduce((sum, item) => {
       const price = parseFloat(item.price.replace(/\s/g, ''));
@@ -172,6 +175,10 @@ const Cart = ({ isOpen, onClose, items, onUpdateQuantity, onRemoveItem }: CartPr
               </div>
 
               <Button
+                onClick={() => {
+                  onClose();
+                  navigate('/checkout');
+                }}
                 className="w-full bg-vt-green-500 hover:bg-vt-green-600 text-white py-6 text-lg"
               >
                 Оформить заказ

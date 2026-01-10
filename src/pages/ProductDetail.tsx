@@ -6,44 +6,27 @@ import Cart from "@/components/Cart";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
+import { useCart } from "@/contexts/CartContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState<Array<{id: number; name: string; brand: string; price: string; image: string; quantity: number}>>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
 
   const product = products.find(p => p.id === Number(id));
-
-  const updateQuantity = (id: number, quantity: number) => {
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
-  };
 
   const addToCart = () => {
     if (!product) return;
 
-    const existingItem = cartItems.find(item => item.id === product.id);
-    if (existingItem) {
-      updateQuantity(product.id, existingItem.quantity + quantity);
-    } else {
-      setCartItems(prev => [...prev, {
-        id: product.id,
-        name: product.name,
-        brand: "VT Cosmetics",
-        price: `${product.price} ₽`,
-        image: product.image,
-        quantity: quantity
-      }]);
-    }
+    addToCartContext({
+      id: product.id,
+      name: product.name,
+      brand: "VT Cosmetics",
+      price: `${product.price} ₽`,
+      image: product.image
+    }, quantity);
     setIsCartOpen(true);
   };
 
@@ -75,7 +58,7 @@ const ProductDetail = () => {
         onRemoveItem={removeItem}
       />
       <Header 
-        cartItemsCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+        cartItemsCount={getTotalItems()}
         onCartClick={() => setIsCartOpen(true)}
       />
 

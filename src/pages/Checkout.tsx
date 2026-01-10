@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,6 +6,9 @@ import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/contexts/CartContext";
+import { AddressSuggestions, DaDataSuggestion, DaDataAddress } from 'react-dadata';
+import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import 'react-dadata/dist/react-dadata.css';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -25,6 +28,9 @@ const Checkout = () => {
     comment: '',
     paymentMethod: 'online'
   });
+  const [addressData, setAddressData] = useState<DaDataSuggestion<DaDataAddress> | undefined>();
+  const [mapCenter, setMapCenter] = useState<[number, number]>([55.751244, 37.618423]);
+  const [mapZoom, setMapZoom] = useState(10);
 
   const deliveryOptions = [
     {
@@ -77,6 +83,29 @@ const Checkout = () => {
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
+
+  const handleAddressSelect = (suggestion: DaDataSuggestion<DaDataAddress> | undefined) => {
+    if (suggestion?.data) {
+      setAddressData(suggestion);
+      setFormData(prev => ({
+        ...prev,
+        city: suggestion.data.city || suggestion.data.settlement || '',
+        address: suggestion.value
+      }));
+
+      const lat = parseFloat(suggestion.data.geo_lat || '55.751244');
+      const lon = parseFloat(suggestion.data.geo_lon || '37.618423');
+      setMapCenter([lat, lon]);
+      setMapZoom(16);
+    }
+  };
+
+  useEffect(() => {
+    if (formData.city === 'Москва' || formData.city === '') {
+      setMapCenter([55.751244, 37.618423]);
+      setMapZoom(10);
+    }
+  }, [formData.city]);
 
   const calculateTotal = () => {
     return cartItems.reduce((sum, item) => {
@@ -217,18 +246,19 @@ const Checkout = () => {
                 {formData.deliveryType === 'courier' && (
                   <div className="space-y-4">
                     <h3 className="font-semibold text-vt-gray-900">Адрес доставки</h3>
-                    <Input
-                      placeholder="Город"
-                      value={formData.city}
-                      onChange={(e) => handleInputChange('city', e.target.value)}
-                      className="w-full"
-                    />
-                    <Input
-                      placeholder="Улица, дом"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      className="w-full"
-                    />
+                    <div className="dadata-address-wrapper">
+                      <AddressSuggestions
+                        token="demotoken"
+                        value={addressData}
+                        onChange={handleAddressSelect}
+                        inputProps={{
+                          placeholder: "Начните вводить адрес...",
+                          className: "w-full px-3 py-2 border border-vt-gray-300 rounded-md focus:border-vt-green-500 focus:outline-none focus:ring-1 focus:ring-vt-green-500"
+                        }}
+                        containerClassName="dadata-container"
+                        suggestionsClassName="dadata-suggestions"
+                      />
+                    </div>
                     <div className="grid grid-cols-3 gap-4">
                       <Input
                         placeholder="Квартира"
@@ -245,6 +275,35 @@ const Checkout = () => {
                         value={formData.floor}
                         onChange={(e) => handleInputChange('floor', e.target.value)}
                       />
+                    </div>
+                    
+                    <div className="mt-6">
+                      <h3 className="font-semibold text-vt-gray-900 mb-3">Адрес на карте</h3>
+                      <div className="border border-vt-gray-300 rounded-lg overflow-hidden" style={{ height: '400px' }}>
+                        <YMaps query={{ apikey: 'demo', lang: 'ru_RU' }}>
+                          <Map
+                            state={{ center: mapCenter, zoom: mapZoom }}
+                            width="100%"
+                            height="100%"
+                          >
+                            {addressData?.data.geo_lat && addressData?.data.geo_lon && (
+                              <Placemark
+                                geometry={[
+                                  parseFloat(addressData.data.geo_lat),
+                                  parseFloat(addressData.data.geo_lon)
+                                ]}
+                                properties={{
+                                  hintContent: formData.address,
+                                  balloonContent: formData.address
+                                }}
+                                options={{
+                                  preset: 'islands#greenDotIcon'
+                                }}
+                              />
+                            )}
+                          </Map>
+                        </YMaps>
+                      </div>
                     </div>
                   </div>
                 )}

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -11,6 +12,8 @@ interface HeaderProps {
 
 const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   const [showCatalog, setShowCatalog] = useState(false);
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const topMenu = [
     { name: "Доставка и оплата", href: "/delivery" },
@@ -137,8 +140,16 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
                   </span>
                 )}
               </Button>
-              <Button variant="ghost" size="icon">
-                <Icon name="User" size={22} />
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => {
+                  logout();
+                  navigate('/login');
+                }}
+                title="Выйти"
+              >
+                <Icon name="LogOut" size={22} />
               </Button>
             </div>
           </div>

@@ -77,12 +77,6 @@ const Login = () => {
             Войти
           </Button>
         </form>
-
-        <div className="mt-6 p-4 bg-vt-gray-50 rounded-lg">
-          <p className="text-sm text-vt-gray-600 text-center">
-            Тестовый доступ: admin / 1234
-          </p>
-        </div>
       </div>
     </div>
   );

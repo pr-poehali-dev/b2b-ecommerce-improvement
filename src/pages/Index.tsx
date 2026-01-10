@@ -506,7 +506,7 @@ const Index = () => {
                 <img 
                   src="https://www.cosmeticstar.ru/img/cosmetic-star.svg" 
                   alt="Cosmetic Star" 
-                  className="h-16 w-auto mb-2"
+                  className="h-16 w-auto mb-2 brightness-0 invert opacity-80"
                 />
               </div>
               <ul className="space-y-2 text-sm text-white/80">

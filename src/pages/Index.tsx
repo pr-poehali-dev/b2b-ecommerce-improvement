@@ -6,10 +6,11 @@ import Icon from "@/components/ui/icon";
 import Cart from "@/components/Cart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useCart } from "@/contexts/CartContext";
 
 const Index = () => {
+  const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("bestsellers");
-  const [cartItems, setCartItems] = useState<Array<{id: number; name: string; brand: string; price: string; image: string; quantity: number}>>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCatalog, setShowCatalog] = useState(false);
 
@@ -189,36 +190,13 @@ const Index = () => {
     : products.filter(p => p.category === selectedCategory);
 
   const addToCart = (product: typeof products[0]) => {
-    setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
-      if (existingItem) {
-        return prev.map(item =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prev, {
-        id: product.id,
-        name: product.name,
-        brand: product.brand,
-        price: product.price,
-        image: product.image,
-        quantity: 1
-      }];
+    addToCartContext({
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      price: `${product.price} ₽`,
+      image: product.image
     });
-  };
-
-  const updateQuantity = (id: number, quantity: number) => {
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
   return (
@@ -231,7 +209,7 @@ const Index = () => {
         onRemoveItem={removeItem}
       />
       <Header 
-        cartItemsCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+        cartItemsCount={getTotalItems()}
         onCartClick={() => setIsCartOpen(true)}
       />
 

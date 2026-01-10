@@ -502,67 +502,62 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Icon name="Sparkles" size={24} />
-                <span className="font-semibold text-lg">VT COSMETICS</span>
+              <div className="mb-6">
+                <img 
+                  src="https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/4a5a02ab-116a-4f55-b112-7e8b3721ec8c.jpg" 
+                  alt="Cosmetic Star" 
+                  className="h-12 w-auto mb-2"
+                />
+                <p className="text-xs text-white/80">Профессиональная косметика</p>
               </div>
-              <p className="text-sm text-white/80">
-                Официальный дистрибьютор профессиональной косметики премиум-класса
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Информация</h4>
               <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition">О компании</a></li>
-                <li><a href="#" className="hover:text-white transition">Доставка и оплата</a></li>
-                <li><a href="#" className="hover:text-white transition">Возврат товара</a></li>
-                <li><a href="#" className="hover:text-white transition">Отзывы</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Каталог</h4>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition">Уход за лицом</a></li>
-                <li><a href="#" className="hover:text-white transition">Уход за телом</a></li>
-                <li><a href="#" className="hover:text-white transition">Уход за волосами</a></li>
-                <li><a href="#" className="hover:text-white transition">Профессиональная косметика</a></li>
+                <li><a href="#privacy" className="hover:text-white transition">Политика конфиденциальности</a></li>
+                <li><a href="#rules" className="hover:text-white transition">Правила продажи</a></li>
+                <li><a href="#consent" className="hover:text-white transition">Согласие на обработку персональных данных</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Контакты</h4>
-              <ul className="space-y-3 text-sm text-white/80">
-                <li className="flex items-center gap-2">
-                  <Icon name="Mail" size={16} />
-                  <span>info@cosmeticstar.ru</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Icon name="Phone" size={16} />
-                  <span>8 (800) 555-35-35</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Icon name="MapPin" size={16} />
-                  <span>Москва, ул. Профессиональная, 1</span>
+              <ul className="space-y-2 text-sm text-white/80">
+                <li>
+                  <a href="mailto:info@cosmeticstar.ru" className="hover:text-white transition">
+                    info@cosmeticstar.ru
+                  </a>
                 </li>
               </ul>
             </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Информация</h4>
+              <ul className="space-y-2 text-sm text-white/80">
+                <li><a href="#order" className="hover:text-white transition">Как сделать заказ</a></li>
+                <li><a href="#exchange" className="hover:text-white transition">Обмен и возврат товара</a></li>
+                <li><a href="#tracking" className="hover:text-white transition">Статус заказа</a></li>
+                <li><a href="#discount" className="hover:text-white transition">Накопительная система скидок</a></li>
+                <li><a href="#about" className="hover:text-white transition">О магазине</a></li>
+                <li><a href="#reviews" className="hover:text-white transition">Отзывы покупателей</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Мы в соцсетях</h4>
+              <div className="flex gap-4">
+                <a href="#" className="hover:text-white transition">
+                  <Icon name="Instagram" size={24} />
+                </a>
+                <a href="#" className="hover:text-white transition">
+                  <Icon name="Facebook" size={24} />
+                </a>
+                <a href="#" className="hover:text-white transition">
+                  <Icon name="Youtube" size={24} />
+                </a>
+              </div>
+            </div>
           </div>
           
-          <div className="pt-8 border-t border-white/20 flex items-center justify-between text-sm text-white/80">
-            <p>© 2024 VT Cosmetics. Все права защищены.</p>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-white transition">
-                <Icon name="Instagram" size={20} />
-              </a>
-              <a href="#" className="hover:text-white transition">
-                <Icon name="Youtube" size={20} />
-              </a>
-              <a href="#" className="hover:text-white transition">
-                <Icon name="Facebook" size={20} />
-              </a>
-            </div>
+          <div className="pt-8 border-t border-white/20 text-sm text-white/80">
+            <p>© Интернет-магазин профессиональной и салонной косметики Cosmetic Star (Косметик Стар)</p>
           </div>
         </div>
       </footer>

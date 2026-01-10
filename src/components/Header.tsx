@@ -15,7 +15,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   const topMenu = [
     { name: "Доставка и оплата", href: "/delivery" },
     { name: "Отслеживание заказа", href: "#tracking" },
-    { name: "Помощь", href: "#help" },
+    { name: "Помощь", href: "/help" },
     { name: "Скидки", href: "/discounts" },
     { name: "О магазине", href: "/about" },
     { name: "Отзывы", href: "#reviews" }

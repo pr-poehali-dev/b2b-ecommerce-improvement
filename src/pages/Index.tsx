@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
+import Cart from "@/components/Cart";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("bestsellers");
-  const [cartCount, setCartCount] = useState(3);
+  const [cartItems, setCartItems] = useState<Array<{id: number; name: string; brand: string; price: string; image: string; quantity: number}>>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const topMenu = [
     { name: "Доставка и оплата", href: "#delivery" },
@@ -203,8 +205,48 @@ const Index = () => {
 
   const [showCatalog, setShowCatalog] = useState(false);
 
+  const addToCart = (product: typeof products[0]) => {
+    setCartItems(prev => {
+      const existingItem = prev.find(item => item.id === product.id);
+      if (existingItem) {
+        return prev.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, {
+        id: product.id,
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      }];
+    });
+  };
+
+  const updateQuantity = (id: number, quantity: number) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    );
+  };
+
+  const removeItem = (id: number) => {
+    setCartItems(prev => prev.filter(item => item.id !== id));
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <Cart
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+        onUpdateQuantity={updateQuantity}
+        onRemoveItem={removeItem}
+      />
       <div className="border-b border-vt-gray-300">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-2 text-xs">
@@ -296,11 +338,16 @@ const Index = () => {
               <Button variant="ghost" size="icon">
                 <Icon name="Heart" size={22} />
               </Button>
-              <Button variant="ghost" size="icon" className="relative">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="relative"
+                onClick={() => setIsCartOpen(true)}
+              >
                 <Icon name="ShoppingCart" size={22} />
-                {cartCount > 0 && (
+                {cartItems.length > 0 && (
                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-vt-green-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {cartCount}
+                    {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
                   </span>
                 )}
               </Button>
@@ -353,7 +400,10 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button className="w-full bg-vt-green-500 hover:bg-vt-green-600 text-white text-sm">
+                    <Button 
+                      onClick={() => addToCart(product)}
+                      className="w-full bg-vt-green-500 hover:bg-vt-green-600 text-white text-sm"
+                    >
                       В корзину
                     </Button>
                   </div>

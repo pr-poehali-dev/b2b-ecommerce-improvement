@@ -4,29 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
 import Cart from "@/components/Cart";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("bestsellers");
   const [cartItems, setCartItems] = useState<Array<{id: number; name: string; brand: string; price: string; image: string; quantity: number}>>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const topMenu = [
-    { name: "Доставка и оплата", href: "#delivery" },
-    { name: "Отслеживание заказа", href: "#tracking" },
-    { name: "Помощь", href: "#help" },
-    { name: "Скидки", href: "#discounts" },
-    { name: "О магазине", href: "#about" },
-    { name: "Отзывы", href: "#reviews" }
-  ];
-
-  const catalogMenu = [
-    { name: "Уход за лицом", icon: "Sparkles" },
-    { name: "Уход за телом", icon: "Heart" },
-    { name: "Уход за волосами", icon: "Scissors" },
-    { name: "Макияж", icon: "Palette" },
-    { name: "Ногти", icon: "Hand" },
-    { name: "Профессиональная косметика", icon: "Award" }
-  ];
+  const [showCatalog, setShowCatalog] = useState(false);
 
   const categories = [
     { id: "bestsellers", name: "Бестселлеры" },
@@ -203,8 +188,6 @@ const Index = () => {
     ? products 
     : products.filter(p => p.category === selectedCategory);
 
-  const [showCatalog, setShowCatalog] = useState(false);
-
   const addToCart = (product: typeof products[0]) => {
     setCartItems(prev => {
       const existingItem = prev.find(item => item.id === product.id);
@@ -247,117 +230,11 @@ const Index = () => {
         onUpdateQuantity={updateQuantity}
         onRemoveItem={removeItem}
       />
-      <div className="border-b border-vt-gray-300">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-2 text-xs">
-            <nav className="flex items-center gap-6">
-              {topMenu.map((item, index) => (
-                <a 
-                  key={index} 
-                  href={item.href}
-                  className="text-vt-gray-600 hover:text-vt-green-500 transition"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </nav>
-            <div className="flex items-center gap-4">
-              <a href="mailto:info@cosmeticstar.ru" className="text-vt-gray-600 hover:text-vt-green-500 transition">
-                info@cosmeticstar.ru
-              </a>
-              <Button variant="ghost" size="sm" className="text-xs">
-                Вход / Регистрация
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Header 
+        cartItemsCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+        onCartClick={() => setIsCartOpen(true)}
+      />
 
-      <header className="sticky top-0 z-50 bg-white border-b border-vt-gray-300">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-8">
-              <div className="flex items-center gap-2">
-                <Icon name="Sparkles" className="text-vt-green-500" size={28} />
-                <div className="font-semibold text-xl tracking-tight">VT COSMETICS</div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <Button 
-                    variant="outline" 
-                    className="border-vt-green-500 text-vt-green-500 hover:bg-vt-green-600 hover:text-white"
-                    onMouseEnter={() => setShowCatalog(true)}
-                    onMouseLeave={() => setShowCatalog(false)}
-                  >
-                    <Icon name="Menu" className="mr-2" size={18} />
-                    Каталог
-                  </Button>
-                  
-                  {showCatalog && (
-                    <div 
-                      className="absolute top-full left-0 mt-2 w-80 bg-white border border-vt-gray-300 shadow-lg"
-                      onMouseEnter={() => setShowCatalog(true)}
-                      onMouseLeave={() => setShowCatalog(false)}
-                    >
-                      {catalogMenu.map((item, index) => (
-                        <a
-                          key={index}
-                          href="#"
-                          className="flex items-center gap-3 px-6 py-3 hover:bg-vt-gray-100 transition"
-                        >
-                          <Icon name={item.icon} size={20} className="text-vt-gray-600" />
-                          <span className="text-sm">{item.name}</span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                
-                <Button variant="ghost" className="text-vt-green-500">
-                  Бренды
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex-1 max-w-xl mx-8">
-              <div className="relative">
-                <Input 
-                  placeholder="Поиск товаров..."
-                  className="pr-10 border-vt-gray-300 focus:border-vt-green-500"
-                />
-                <Icon 
-                  name="Search" 
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-vt-gray-600" 
-                  size={18} 
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon">
-                <Icon name="Heart" size={22} />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="relative"
-                onClick={() => setIsCartOpen(true)}
-              >
-                <Icon name="ShoppingCart" size={22} />
-                {cartItems.length > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-vt-green-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-                  </span>
-                )}
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Icon name="User" size={22} />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
 
       <section className="py-12 bg-vt-gray-100">
         <div className="container mx-auto px-4">
@@ -548,68 +425,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="bg-vt-green-500 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="mb-6">
-                <img 
-                  src="https://www.cosmeticstar.ru/img/cosmetic-star.svg" 
-                  alt="Cosmetic Star" 
-                  className="h-16 w-auto mb-2 brightness-0 invert opacity-80"
-                />
-              </div>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#privacy" className="hover:text-white transition">Политика конфиденциальности</a></li>
-                <li><a href="#rules" className="hover:text-white transition">Правила продажи</a></li>
-                <li><a href="#consent" className="hover:text-white transition">Согласие на обработку персональных данных</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Контакты</h4>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li>
-                  <a href="mailto:info@cosmeticstar.ru" className="hover:text-white transition">
-                    info@cosmeticstar.ru
-                  </a>
-                </li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Информация</h4>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#order" className="hover:text-white transition">Как сделать заказ</a></li>
-                <li><a href="#exchange" className="hover:text-white transition">Обмен и возврат товара</a></li>
-                <li><a href="#tracking" className="hover:text-white transition">Статус заказа</a></li>
-                <li><a href="#discount" className="hover:text-white transition">Накопительная система скидок</a></li>
-                <li><a href="#about" className="hover:text-white transition">О магазине</a></li>
-                <li><a href="#reviews" className="hover:text-white transition">Отзывы покупателей</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Мы в соцсетях</h4>
-              <div className="flex gap-4">
-                <a href="#" className="hover:text-white transition">
-                  <Icon name="Instagram" size={24} />
-                </a>
-                <a href="#" className="hover:text-white transition">
-                  <Icon name="Facebook" size={24} />
-                </a>
-                <a href="#" className="hover:text-white transition">
-                  <Icon name="Youtube" size={24} />
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div className="pt-8 border-t border-white/20 text-sm text-white/80">
-            <p>© Интернет-магазин профессиональной и салонной косметики Cosmetic Star (Косметик Стар)</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

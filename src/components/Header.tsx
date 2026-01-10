@@ -22,12 +22,12 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   ];
 
   const catalogMenu = [
-    { name: "Уход за лицом", icon: "Sparkles" },
-    { name: "Уход за телом", icon: "Heart" },
-    { name: "Уход за волосами", icon: "Scissors" },
-    { name: "Макияж", icon: "Palette" },
-    { name: "Ногти", icon: "Hand" },
-    { name: "Профессиональная косметика", icon: "Award" }
+    { name: "Уход за лицом", icon: "Sparkles", link: "/catalog?category=Уход%20за%20лицом" },
+    { name: "Уход за телом", icon: "Heart", link: "/catalog?category=Уход%20за%20телом" },
+    { name: "Уход за волосами", icon: "Scissors", link: "/catalog?category=Уход%20за%20волосами" },
+    { name: "Макияж", icon: "Palette", link: "/catalog?category=Макияж" },
+    { name: "Ногти", icon: "Hand", link: "/catalog?category=Ногти" },
+    { name: "Профессиональная косметика", icon: "Award", link: "/catalog?category=Профессиональная%20косметика" }
   ];
 
   return (
@@ -81,19 +81,20 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
                   
                   {showCatalog && (
                     <div 
-                      className="absolute top-full left-0 mt-2 w-80 bg-white border border-vt-gray-300 shadow-lg"
+                      className="absolute top-full left-0 mt-2 w-80 bg-white border border-vt-gray-300 shadow-lg z-50"
                       onMouseEnter={() => setShowCatalog(true)}
                       onMouseLeave={() => setShowCatalog(false)}
                     >
                       {catalogMenu.map((item, index) => (
-                        <a
+                        <Link
                           key={index}
-                          href="#"
+                          to={item.link}
                           className="flex items-center gap-3 px-6 py-3 hover:bg-vt-gray-100 transition"
+                          onClick={() => setShowCatalog(false)}
                         >
                           <Icon name={item.icon} size={20} className="text-vt-gray-600" />
                           <span className="text-sm">{item.name}</span>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   )}

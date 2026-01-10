@@ -43,7 +43,7 @@ const Index = () => {
       oldPrice: "3 200",
       rating: 4.9,
       reviews: 999,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/8c617bf9-36ee-4afb-a3d9-eb9b6b3d1237.jpg",
       category: "bestsellers",
       badge: "Tarzan PICK",
       discount: "-20%"
@@ -57,7 +57,7 @@ const Index = () => {
       oldPrice: "4 500",
       rating: 4.8,
       reviews: 453,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/a78561a5-4849-47c2-89ef-a7dd842753e8.jpg",
       category: "bestsellers",
       badge: "Annie PICK",
       discount: "-30%"
@@ -71,7 +71,7 @@ const Index = () => {
       oldPrice: "3 400",
       rating: 4.7,
       reviews: 66,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/4c0bdd45-785c-47af-8dfc-990696789aab.jpg",
       category: "bestsellers",
       badge: "Youngseo PICK",
       discount: "-20%"
@@ -85,7 +85,7 @@ const Index = () => {
       oldPrice: "200",
       rating: 4.8,
       reviews: 5,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/a42b157c-b9f3-4728-a8cb-911dcf02459d.jpg",
       category: "bestsellers",
       badge: "Бестселлер",
       discount: "-15%"
@@ -98,7 +98,7 @@ const Index = () => {
       price: "2 900",
       rating: 4.6,
       reviews: 87,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3ce23259-3d5f-41b7-9f0f-3112dd1a3b98.jpg",
       category: "new",
       badge: "Новинка"
     },
@@ -111,7 +111,7 @@ const Index = () => {
       oldPrice: "4 000",
       rating: 4.9,
       reviews: 542,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/117d0fcb-aea5-4eb0-8828-3513856d8d8c.jpg",
       category: "bestsellers",
       badge: "Бестселлер",
       discount: "-20%"
@@ -125,7 +125,7 @@ const Index = () => {
       oldPrice: "2 200",
       rating: 4.7,
       reviews: 234,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3a9f4077-4a29-45b7-8f01-95dd5b39445a.jpg",
       category: "discounts",
       discount: "-18%"
     },
@@ -137,7 +137,7 @@ const Index = () => {
       price: "2 400",
       rating: 4.9,
       reviews: 142,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3f944756-0933-4258-8a18-ec51ce854c21.jpg",
       category: "new",
       badge: "Новинка"
     },
@@ -150,7 +150,7 @@ const Index = () => {
       oldPrice: "180",
       rating: 4.8,
       reviews: 321,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/a061e003-a7fd-4d45-bd94-f1ae568502a7.jpg",
       category: "bestsellers",
       discount: "-17%"
     },
@@ -163,7 +163,7 @@ const Index = () => {
       oldPrice: "5 000",
       rating: 4.9,
       reviews: 267,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/3b07222c-b397-4ec5-a1fc-30e87172a5b7.jpg",
       category: "new",
       badge: "Новинка",
       discount: "-20%"
@@ -176,7 +176,7 @@ const Index = () => {
       price: "1 900",
       rating: 4.7,
       reviews: 98,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/cc62f59c-8382-4a98-adab-03709064c8c5.jpg",
       category: "popular"
     },
     {
@@ -188,7 +188,7 @@ const Index = () => {
       oldPrice: "1 500",
       rating: 4.6,
       reviews: 445,
-      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/b8ca7a44-0c89-4db7-afe8-38f950108058.jpg",
+      image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/96f5df3e-3566-4963-bf2b-c480529c4739.jpg",
       category: "discounts",
       badge: "Скидка",
       discount: "-20%"

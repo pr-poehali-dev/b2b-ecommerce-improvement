@@ -209,35 +209,32 @@ const Catalog = () => {
                     key={product.id}
                     className="group bg-white border border-vt-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
                   >
-                    <div className="relative aspect-square overflow-hidden bg-vt-gray-50">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      {product.isNew && (
-                        <div className="absolute top-3 left-3 bg-vt-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                          NEW
-                        </div>
-                      )}
-                      <button
-                        onClick={() => addToCart(product.id)}
-                        className="absolute inset-x-4 bottom-4 bg-vt-green-500 text-white py-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 font-medium hover:bg-vt-green-600"
-                      >
-                        <Icon name="ShoppingCart" size={18} />
-                        В корзину
-                      </button>
-                    </div>
+                    <Link to={`/product/${product.id}`} className="block">
+                      <div className="relative aspect-square overflow-hidden bg-vt-gray-50">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        {product.isNew && (
+                          <div className="absolute top-3 left-3 bg-vt-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            NEW
+                          </div>
+                        )}
+                      </div>
+                    </Link>
                     
                     <div className="p-4">
                       <div className="text-xs text-vt-gray-500 mb-1">{product.line}</div>
-                      <h3 className="font-semibold text-vt-gray-900 mb-2 line-clamp-2 min-h-[2.5rem]">
-                        {product.name}
-                      </h3>
+                      <Link to={`/product/${product.id}`}>
+                        <h3 className="font-semibold text-vt-gray-900 mb-2 line-clamp-2 min-h-[2.5rem] hover:text-vt-green-500 transition">
+                          {product.name}
+                        </h3>
+                      </Link>
                       <p className="text-xs text-vt-gray-600 mb-3 line-clamp-2">
                         {product.description}
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mb-3">
                         <div>
                           <div className="text-sm text-vt-gray-500">{product.volume}</div>
                           <div className="text-xl font-bold text-vt-green-500">
@@ -245,6 +242,13 @@ const Catalog = () => {
                           </div>
                         </div>
                       </div>
+                      <button
+                        onClick={() => addToCart(product.id)}
+                        className="w-full bg-vt-green-500 text-white py-2 rounded-lg flex items-center justify-center gap-2 font-medium hover:bg-vt-green-600 transition"
+                      >
+                        <Icon name="ShoppingCart" size={18} />
+                        В корзину
+                      </button>
                     </div>
                   </div>
                 ))}

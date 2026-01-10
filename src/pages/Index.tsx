@@ -504,11 +504,10 @@ const Index = () => {
             <div>
               <div className="mb-6">
                 <img 
-                  src="https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/4a5a02ab-116a-4f55-b112-7e8b3721ec8c.jpg" 
+                  src="https://www.cosmeticstar.ru/img/cosmetic-star.svg" 
                   alt="Cosmetic Star" 
-                  className="h-12 w-auto mb-2"
+                  className="h-16 w-auto mb-2"
                 />
-                <p className="text-xs text-white/80">Профессиональная косметика</p>
               </div>
               <ul className="space-y-2 text-sm text-white/80">
                 <li><a href="#privacy" className="hover:text-white transition">Политика конфиденциальности</a></li>

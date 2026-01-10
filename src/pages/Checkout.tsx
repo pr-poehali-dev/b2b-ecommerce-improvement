@@ -5,12 +5,20 @@ import Footer from "@/components/Footer";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { DaDataSuggestion, DaDataAddress } from 'react-dadata';
-import 'react-dadata/dist/react-dadata.css';
 import DeliveryStep from "@/components/checkout/DeliveryStep";
 import ContactsStep from "@/components/checkout/ContactsStep";
 import PaymentStep from "@/components/checkout/PaymentStep";
 import OrderSummary from "@/components/checkout/OrderSummary";
+
+interface AddressSuggestion {
+  value: string;
+  data: {
+    city?: string;
+    settlement?: string;
+    geo_lat?: string;
+    geo_lon?: string;
+  };
+}
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -30,7 +38,7 @@ const Checkout = () => {
     comment: '',
     paymentMethod: 'online'
   });
-  const [addressData, setAddressData] = useState<DaDataSuggestion<DaDataAddress> | undefined>();
+  const [addressData, setAddressData] = useState<AddressSuggestion | undefined>();
   const [mapCenter, setMapCenter] = useState<[number, number]>([55.751244, 37.618423]);
   const [mapZoom, setMapZoom] = useState(10);
 
@@ -86,13 +94,15 @@ const Checkout = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleAddressSelect = (suggestion: DaDataSuggestion<DaDataAddress> | undefined) => {
+  const handleAddressSelect = (value: string, suggestion?: AddressSuggestion) => {
+    setFormData(prev => ({ ...prev, address: value }));
+    
     if (suggestion?.data) {
       setAddressData(suggestion);
       setFormData(prev => ({
         ...prev,
         city: suggestion.data.city || suggestion.data.settlement || '',
-        address: suggestion.value
+        address: value
       }));
 
       const lat = parseFloat(suggestion.data.geo_lat || '55.751244');

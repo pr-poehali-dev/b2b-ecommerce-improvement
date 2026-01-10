@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
-import { AddressSuggestions, DaDataSuggestion, DaDataAddress } from 'react-dadata';
+import AddressAutocomplete from "@/components/AddressAutocomplete";
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
 interface DeliveryOption {
@@ -11,6 +11,16 @@ interface DeliveryOption {
   description: string;
   price: string;
   time: string;
+}
+
+interface AddressSuggestion {
+  value: string;
+  data: {
+    city?: string;
+    settlement?: string;
+    geo_lat?: string;
+    geo_lon?: string;
+  };
 }
 
 interface DeliveryStepProps {
@@ -23,11 +33,11 @@ interface DeliveryStepProps {
     entrance: string;
     floor: string;
   };
-  addressData: DaDataSuggestion<DaDataAddress> | undefined;
+  addressData: AddressSuggestion | undefined;
   mapCenter: [number, number];
   mapZoom: number;
   onInputChange: (field: string, value: string) => void;
-  onAddressSelect: (suggestion: DaDataSuggestion<DaDataAddress> | undefined) => void;
+  onAddressSelect: (value: string, suggestion?: AddressSuggestion) => void;
   onNext: () => void;
 }
 
@@ -81,19 +91,12 @@ const DeliveryStep = ({
       {formData.deliveryType === 'courier' && (
         <div className="space-y-4">
           <h3 className="font-semibold text-vt-gray-900">Адрес доставки</h3>
-          <div className="dadata-address-wrapper">
-            <AddressSuggestions
-              token="demotoken"
-              value={addressData}
-              onChange={onAddressSelect}
-              inputProps={{
-                placeholder: "Начните вводить адрес...",
-                className: "w-full px-3 py-2 border border-vt-gray-300 rounded-md focus:border-vt-green-500 focus:outline-none focus:ring-1 focus:ring-vt-green-500"
-              }}
-              containerClassName="dadata-container"
-              suggestionsClassName="dadata-suggestions"
-            />
-          </div>
+          <AddressAutocomplete
+            value={formData.address}
+            onChange={onAddressSelect}
+            placeholder="Начните вводить адрес..."
+            className="w-full"
+          />
           <div className="grid grid-cols-3 gap-4">
             <Input
               placeholder="Квартира"

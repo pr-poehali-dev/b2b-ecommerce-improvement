@@ -8,8 +8,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
 import { products as catalogProducts } from "@/data/products";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("bestsellers");
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -109,6 +111,7 @@ const Index = () => {
               <div 
                 key={product.id}
                 className="group bg-white border border-vt-gray-200 hover:border-vt-green-500 transition-all cursor-pointer"
+                onClick={() => navigate(`/product/${product.id}`)}
               >
                 <div className="relative aspect-square bg-vt-gray-100 overflow-hidden">
                   {product.badge && (
@@ -128,7 +131,10 @@ const Index = () => {
                   />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button 
-                      onClick={() => addToCart(product)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
                       className="w-full bg-vt-green-500 hover:bg-vt-green-600 text-white text-sm"
                     >
                       В корзину
@@ -173,6 +179,7 @@ const Index = () => {
                       variant="ghost" 
                       size="icon"
                       className="hover:bg-vt-gray-100"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <Icon name="Heart" size={18} />
                     </Button>

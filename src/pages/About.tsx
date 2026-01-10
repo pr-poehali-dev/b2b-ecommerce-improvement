@@ -38,7 +38,8 @@ const About = () => {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-4">О магазине VT Cosmetics</h1>
           <p className="text-lg text-white/90 max-w-3xl">
-            Официальный дистрибьютор корейской профессиональной косметики VT Cosmetics в России
+            Прямой договор с официальным дистрибьютором косметики Holy Land в России.
+            Вся продукция имеет сертификаты качества.
           </p>
         </div>
       </div>

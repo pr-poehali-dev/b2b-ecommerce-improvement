@@ -40,38 +40,53 @@ const UploadImages = () => {
       const reader = new FileReader();
       
       reader.onload = async (e) => {
-        const base64String = e.target?.result as string;
-        const base64Data = base64String.split(',')[1];
+        try {
+          const base64String = e.target?.result as string;
+          const base64Data = base64String.split(',')[1];
 
-        const response = await fetch('https://functions.poehali.dev/1a96d07d-cef4-4d2e-99a6-5b8a789134b7', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            productName: productName,
-            imageBase64: base64Data,
-            filename: file.name
-          })
-        });
+          const response = await fetch(func2url['upload-image'], {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              productName: productName,
+              imageBase64: base64Data,
+              filename: file.name
+            })
+          });
 
-        const result = await response.json();
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
 
-        if (result.success) {
-          setUploadStatus(prev => ({ ...prev, [productId]: '✅ Загружено' }));
-          setProducts(prev => prev.map(p => 
-            p.id === productId ? { ...p, image: result.cdnUrl } : p
-          ));
-        } else {
-          setUploadStatus(prev => ({ ...prev, [productId]: '❌ Ошибка' }));
+          const result = await response.json();
+
+          if (result.success) {
+            setUploadStatus(prev => ({ ...prev, [productId]: '✅ Загружено' }));
+            setProducts(prev => prev.map(p => 
+              p.id === productId ? { ...p, image: result.cdnUrl } : p
+            ));
+          } else {
+            setUploadStatus(prev => ({ ...prev, [productId]: `❌ ${result.error || 'Ошибка'}` }));
+          }
+        } catch (err) {
+          setUploadStatus(prev => ({ ...prev, [productId]: '❌ Ошибка загрузки' }));
+          console.error('Upload failed:', err);
+        } finally {
+          setUploading(null);
         }
+      };
+
+      reader.onerror = () => {
+        setUploadStatus(prev => ({ ...prev, [productId]: '❌ Ошибка чтения файла' }));
+        setUploading(null);
       };
 
       reader.readAsDataURL(file);
     } catch (error) {
       setUploadStatus(prev => ({ ...prev, [productId]: '❌ Ошибка' }));
       console.error('Upload failed:', error);
-    } finally {
       setUploading(null);
     }
   };

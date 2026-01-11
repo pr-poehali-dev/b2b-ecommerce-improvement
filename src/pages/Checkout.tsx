@@ -143,8 +143,10 @@ const Checkout = () => {
       });
 
       const result = await response.json();
+      console.log('Response status:', response.status);
+      console.log('Response data:', result);
       
-      if (response.ok && result.success) {
+      if (response.ok) {
         clearCart();
         navigate('/order-success');
       } else {

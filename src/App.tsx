@@ -35,19 +35,19 @@ const App = () => (
           <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-            <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-            <Route path="/delivery" element={<ProtectedRoute><Delivery /></ProtectedRoute>} />
-            <Route path="/discounts" element={<ProtectedRoute><Discounts /></ProtectedRoute>} />
-            <Route path="/help" element={<ProtectedRoute><Help /></ProtectedRoute>} />
-            <Route path="/catalog" element={<ProtectedRoute><Catalog /></ProtectedRoute>} />
-            <Route path="/product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
-            <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-            <Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
-            <Route path="/privacy" element={<ProtectedRoute><Privacy /></ProtectedRoute>} />
-            <Route path="/sales-rules" element={<ProtectedRoute><SalesRules /></ProtectedRoute>} />
-            <Route path="/consent" element={<ProtectedRoute><Consent /></ProtectedRoute>} />
-            <Route path="/upload-images" element={<UploadImages />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/delivery" element={<Delivery />} />
+            <Route path="/discounts" element={<Discounts />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-success" element={<OrderSuccess />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/sales-rules" element={<SalesRules />} />
+            <Route path="/consent" element={<Consent />} />
+            <Route path="/upload-images" element={<ProtectedRoute><UploadImages /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

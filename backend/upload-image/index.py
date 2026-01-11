@@ -79,9 +79,11 @@ def handler(event: dict, context) -> dict:
         conn = psycopg2.connect(os.environ['DATABASE_URL'])
         cur = conn.cursor()
         
+        safe_cdn_url = cdn_url.replace("'", "''")
+        safe_product_name = product_name.replace("'", "''")
+        
         cur.execute(
-            "UPDATE products SET image = %s WHERE name = %s",
-            (cdn_url, product_name)
+            f"UPDATE products SET image = '{safe_cdn_url}' WHERE name = '{safe_product_name}'"
         )
         
         updated_rows = cur.rowcount

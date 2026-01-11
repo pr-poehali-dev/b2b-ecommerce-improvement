@@ -22,8 +22,13 @@ export const productLines = [
 ];
 
 export const categories = [
-  "Уход за лицом",
-  "Макияж"
+  "Сыворотки",
+  "Маски и патчи",
+  "Кремы и бальзамы",
+  "Очищение",
+  "Тонеры и пады",
+  "Солнцезащитные средства",
+  "Гели"
 ];
 
 export const products: Product[] = [

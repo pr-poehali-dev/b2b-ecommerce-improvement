@@ -5,8 +5,7 @@ import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { productLines, categories } from "@/data/products";
-import { useCatalogFilters } from "@/hooks/useCatalogFilters";
+import { categories } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
 import func2url from '../../backend/func2url.json';
 
@@ -22,9 +21,8 @@ interface Product {
 
 const Catalog = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { selectedCategory, selectedLine, setSelectedCategory, setSelectedLine } = useCatalogFilters();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000 });
-  const [showNewOnly, setShowNewOnly] = useState(false);
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -76,9 +74,7 @@ const Catalog = () => {
 
   const clearFilters = () => {
     setSelectedCategory(null);
-    setSelectedLine(null);
     setPriceRange({ min: 0, max: 10000 });
-    setShowNewOnly(false);
   };
 
   return (
@@ -147,26 +143,6 @@ const Catalog = () => {
                 </div>
 
                 <div className="border-t border-vt-gray-200 pt-6">
-                  <h4 className="font-medium mb-3 text-vt-green-500">Линейки продукции</h4>
-                  <div className="space-y-2 max-h-64 overflow-y-auto">
-                    {productLines.map((line) => (
-                      <label key={line} className="flex items-center gap-2 cursor-pointer group">
-                        <input
-                          type="radio"
-                          name="line"
-                          checked={selectedLine === line}
-                          onChange={() => setSelectedLine(selectedLine === line ? null : line)}
-                          className="w-4 h-4 text-vt-green-500 border-vt-gray-300 focus:ring-vt-green-500"
-                        />
-                        <span className="text-sm text-vt-gray-700 group-hover:text-vt-green-500 transition">
-                          {line}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="border-t border-vt-gray-200 pt-6">
                   <h4 className="font-medium mb-3 text-vt-green-500">Цена</h4>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -187,20 +163,6 @@ const Catalog = () => {
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className="border-t border-vt-gray-200 pt-6">
-                  <label className="flex items-center gap-2 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      checked={showNewOnly}
-                      onChange={(e) => setShowNewOnly(e.target.checked)}
-                      className="w-4 h-4 text-vt-green-500 border-vt-gray-300 focus:ring-vt-green-500 rounded"
-                    />
-                    <span className="text-sm text-vt-gray-700 group-hover:text-vt-green-500 transition">
-                      Только новинки
-                    </span>
-                  </label>
                 </div>
               </div>
             </div>

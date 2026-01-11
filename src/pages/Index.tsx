@@ -52,6 +52,8 @@ const Index = () => {
   ];
 
   const products = useMemo(() => {
+    if (catalogProducts.length === 0) return [];
+    
     const shuffled = [...catalogProducts].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 12);
     
@@ -64,14 +66,14 @@ const Index = () => {
       const rating = (4.5 + Math.random() * 0.5).toFixed(1);
       const reviews = Math.floor(Math.random() * 800) + 50;
       
-      const badges = p.isHit ? ['Бестселлер', 'ХИТ'] : (p.isNew ? ['Новинка'] : ['']);
-      const badge = badges[Math.floor(Math.random() * badges.length)];
+      const isBestseller = p.price >= 2000;
+      const badge = isBestseller ? 'Бестселлер' : undefined;
       
       return {
         id: p.id,
         name: p.name,
         brand: 'VT COSMETICS',
-        description: p.volume,
+        description: p.description,
         price: p.price.toString(),
         oldPrice: oldPrice?.toString(),
         rating: parseFloat(rating),
@@ -82,7 +84,7 @@ const Index = () => {
         discount: hasDiscount ? `-${discountPercent}%` : undefined
       };
     });
-  }, []);
+  }, [catalogProducts]);
 
   const brands = ["VT COSMETICS", "HOLY LAND", "GIGI", "Christina", "Anna Lotan", "Dermalogica"];
 

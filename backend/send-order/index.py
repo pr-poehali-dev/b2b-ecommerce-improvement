@@ -34,6 +34,7 @@ def handler(event: dict, context) -> dict:
 
     try:
         body = json.loads(event.get('body', '{}'))
+        print(f"Received body: {json.dumps(body)[:200]}")
         
         order_data = body.get('order', {})
         items = body.get('items', [])
@@ -43,7 +44,10 @@ def handler(event: dict, context) -> dict:
         smtp_user = os.environ.get('SMTP_USER')
         smtp_password = os.environ.get('SMTP_PASSWORD')
         
+        print(f"SMTP config: host={smtp_host}, port={smtp_port}, user={smtp_user}, has_password={bool(smtp_password)}")
+        
         if not all([smtp_host, smtp_user, smtp_password]):
+            print("ERROR: SMTP settings missing!")
             return {
                 'statusCode': 500,
                 'headers': {
@@ -141,10 +145,14 @@ def handler(event: dict, context) -> dict:
         html_part = MIMEText(html_body, 'html', 'utf-8')
         msg.attach(html_part)
 
+        print("Connecting to SMTP...")
         with smtplib.SMTP(smtp_host, smtp_port) as server:
             server.starttls()
+            print("STARTTLS success, logging in...")
             server.login(smtp_user, smtp_password)
+            print("Login success, sending message...")
             server.send_message(msg)
+        print("Email sent successfully!")
 
         return {
             'statusCode': 200,
@@ -156,6 +164,9 @@ def handler(event: dict, context) -> dict:
         }
 
     except Exception as e:
+        print(f"ERROR: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return {
             'statusCode': 500,
             'headers': {

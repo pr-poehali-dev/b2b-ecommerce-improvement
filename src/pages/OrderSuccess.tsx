@@ -71,26 +71,6 @@ const OrderSuccess = () => {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 mb-8">
-            <div className="bg-white border border-vt-gray-200 rounded-lg p-4">
-              <Icon name="Phone" size={24} className="text-vt-green-500 mx-auto mb-2" />
-              <p className="text-sm font-medium text-vt-gray-900 mb-1">Остались вопросы?</p>
-              <p className="text-xs text-vt-gray-600 mb-2">Позвоните нам</p>
-              <a href="tel:+74951234567" className="text-vt-green-500 font-semibold text-sm hover:underline">
-                +7 (495) 123-45-67
-              </a>
-            </div>
-
-            <div className="bg-white border border-vt-gray-200 rounded-lg p-4">
-              <Icon name="Mail" size={24} className="text-vt-green-500 mx-auto mb-2" />
-              <p className="text-sm font-medium text-vt-gray-900 mb-1">Напишите нам</p>
-              <p className="text-xs text-vt-gray-600 mb-2">Ответим в течение часа</p>
-              <a href="mailto:info@vtcosmetic.ru" className="text-vt-green-500 font-semibold text-sm hover:underline">
-                info@vtcosmetic.ru
-              </a>
-            </div>
-          </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild

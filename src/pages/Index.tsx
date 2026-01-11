@@ -218,39 +218,17 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-vt-green-500 text-vt-green-500 hover:bg-vt-green-600 hover:text-white"
-            >
-              Показать ещё
-            </Button>
-          </div>
+
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-semibold text-center mb-12">Популярные бренды</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {brands.map((brand, index) => (
-              <div 
-                key={index}
-                className="flex items-center justify-center p-8 border border-vt-gray-200 hover:border-vt-green-500 transition cursor-pointer"
-              >
-                <span className="text-sm font-medium text-vt-green-500 text-center">{brand}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       <section className="py-16 bg-vt-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-semibold text-center mb-4">О магазине</h2>
           <p className="text-center text-vt-gray-600 max-w-3xl mx-auto mb-12">
-            Cosmetic Star — официальный дистрибьютор профессиональной косметики. 
+            VTcosmetic — интернет-магазин профессиональной косметики. 
             Мы работаем только с оригинальной продукцией от проверенных производителей.
           </p>
           

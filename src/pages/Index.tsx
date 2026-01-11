@@ -6,6 +6,7 @@ import Icon from "@/components/ui/icon";
 import Cart from "@/components/Cart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProductLinesSidebar from "@/components/ProductLinesSidebar";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import func2url from '../../backend/func2url.json';
@@ -55,12 +56,13 @@ const Index = () => {
     if (catalogProducts.length === 0) return [];
     
     const shuffled = [...catalogProducts].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 12);
+    const selected = shuffled.slice(0, 16);
     
     return selected.map((p, index) => {
       const categories = ['bestsellers', 'new', 'discounts', 'popular'];
       const assignedCategory = categories[index % categories.length];
-      const hasDiscount = Math.random() > 0.5;
+      
+      const hasDiscount = assignedCategory === 'discounts' ? true : Math.random() > 0.6;
       const discountPercent = hasDiscount ? [10, 15, 20, 25, 30][Math.floor(Math.random() * 5)] : 0;
       const oldPrice = hasDiscount ? Math.floor(p.price * (1 + discountPercent / 100)) : undefined;
       const rating = (4.5 + Math.random() * 0.5).toFixed(1);
@@ -90,6 +92,8 @@ const Index = () => {
 
   const filteredProducts = selectedCategory === "bestsellers" 
     ? products 
+    : selectedCategory === "discounts"
+    ? products.filter(p => p.category === selectedCategory && p.oldPrice)
     : products.filter(p => p.category === selectedCategory);
 
   const addToCart = (product: { id: number; name: string; brand: string; price: string; image: string }) => {
@@ -135,7 +139,12 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid lg:grid-cols-[300px_1fr] gap-8">
+            <aside className="hidden lg:block">
+              <ProductLinesSidebar />
+            </aside>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
               <div 
                 key={product.id}
@@ -216,6 +225,7 @@ const Index = () => {
                 </div>
               </div>
             ))}
+            </div>
           </div>
 
 

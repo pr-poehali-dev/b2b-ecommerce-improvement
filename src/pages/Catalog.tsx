@@ -7,6 +7,7 @@ import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { categories } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
+import ProductLinesSidebar from "@/components/ProductLinesSidebar";
 import func2url from '../../backend/func2url.json';
 
 interface Product {
@@ -189,6 +190,8 @@ const Catalog = () => {
                 </div>
               </div>
             </div>
+
+            <ProductLinesSidebar />
           </aside>
 
           <div>

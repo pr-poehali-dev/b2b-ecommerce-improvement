@@ -93,7 +93,7 @@ def handler(event: dict, context) -> dict:
         
         print(f"Updating product: {safe_product_name}")
         cur.execute(
-            f"UPDATE products SET image = '{safe_cdn_url}' WHERE name = '{safe_product_name}'"
+            f"UPDATE t_p91512696_b2b_ecommerce_improv.products SET image_url = '{safe_cdn_url}' WHERE name = '{safe_product_name}'"
         )
         
         updated_rows = cur.rowcount

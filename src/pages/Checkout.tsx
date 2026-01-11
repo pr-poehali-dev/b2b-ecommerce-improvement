@@ -126,10 +126,35 @@ const Checkout = () => {
     }, 0);
   };
 
-  const handleSubmitOrder = () => {
-    console.log('Order submitted:', formData, cartItems);
-    clearCart();
-    navigate('/order-success');
+  const handleSubmitOrder = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/c3b779d4-d91f-4307-839c-dfe00762c5d2', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          order: {
+            ...formData,
+            deliveryCost: deliveryCost
+          },
+          items: cartItems
+        })
+      });
+
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        clearCart();
+        navigate('/order-success');
+      } else {
+        console.error('Order send failed:', result.error);
+        alert('Ошибка при отправке заказа. Попробуйте ещё раз.');
+      }
+    } catch (error) {
+      console.error('Order error:', error);
+      alert('Ошибка при отправке заказа. Попробуйте ещё раз.');
+    }
   };
 
   if (cartItems.length === 0) {

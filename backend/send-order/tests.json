@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "Send order email",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "order": {
+          "firstName": "Иван",
+          "lastName": "Петров",
+          "phone": "+7 (999) 123-45-67",
+          "email": "test@example.com",
+          "deliveryType": "courier",
+          "city": "Москва",
+          "address": "ул. Тестовая, д. 1",
+          "apartment": "25",
+          "entrance": "2",
+          "floor": "5",
+          "paymentMethod": "online",
+          "comment": "Тестовый заказ",
+          "deliveryCost": 300
+        },
+        "items": [
+          {
+            "name": "Тестовый товар",
+            "price": "1000 ₽",
+            "quantity": 2
+          }
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

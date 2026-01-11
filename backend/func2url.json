@@ -1,5 +1,5 @@
 {
-  "refresh-products": "https://functions.poehali.dev/b4b832a0-33e5-465d-be7a-4e5f73e89cee",
+  "send-order": "https://functions.poehali.dev/c3b779d4-d91f-4307-839c-dfe00762c5d2",
   "products": "https://functions.poehali.dev/5d8e0cde-839c-424c-bf43-0024d8a5851c",
   "dadata": "https://functions.poehali.dev/e87fd761-7841-4d30-b8c7-0df1b23dfa08"
 }

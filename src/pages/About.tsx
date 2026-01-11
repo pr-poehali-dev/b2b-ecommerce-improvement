@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import Header from "@/components/Header";
@@ -6,6 +7,7 @@ import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
 
 const About = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<Array<{id: number; name: string; brand: string; price: string; image: string; quantity: number}>>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -163,7 +165,10 @@ const About = () => {
             </div>
 
             <div className="mt-8">
-              <Button className="bg-vt-green-500 hover:bg-vt-green-600 text-white">
+              <Button 
+                onClick={() => navigate('/catalog')}
+                className="bg-vt-green-500 hover:bg-vt-green-600 text-white"
+              >
                 Перейти в каталог
               </Button>
             </div>

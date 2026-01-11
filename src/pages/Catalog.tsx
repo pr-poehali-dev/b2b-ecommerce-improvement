@@ -46,8 +46,12 @@ const Catalog = () => {
 
   useEffect(() => {
     const categoryParam = searchParams.get('category');
+    const lineParam = searchParams.get('line');
     if (categoryParam) {
       setSelectedCategory(categoryParam);
+    }
+    if (lineParam) {
+      setSelectedCategory(lineParam);
     }
   }, [searchParams]);
 
@@ -65,6 +69,7 @@ const Catalog = () => {
   };
 
   const searchQuery = searchParams.get('search');
+  const lineQuery = searchParams.get('line');
   
   const filteredProducts = products.filter(product => {
     if (searchQuery) {
@@ -74,7 +79,8 @@ const Catalog = () => {
         product.description?.toLowerCase().includes(query);
       if (!matchesSearch) return false;
     }
-    if (selectedCategory && product.category !== selectedCategory) return false;
+    if (lineQuery && !product.name.toUpperCase().includes(lineQuery.toUpperCase())) return false;
+    if (selectedCategory && product.category !== selectedCategory && product.name.toUpperCase().includes(selectedCategory.toUpperCase()) === false) return false;
     if (product.price < priceRange.min || product.price > priceRange.max) return false;
     return true;
   });

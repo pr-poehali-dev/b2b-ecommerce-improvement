@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
+import ContactForm from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
 
 const Help = () => {
@@ -137,53 +138,14 @@ const Help = () => {
               </div>
             </section>
 
-            <section className="mb-12">
-              <h2 className="text-2xl font-semibold text-vt-green-500 mb-6">Не нашли ответ?</h2>
+            <section className="mb-12" id="contact-form">
+              <h2 className="text-2xl font-semibold text-vt-green-500 mb-6">Форма обратной связи</h2>
               <div className="bg-vt-gray-100 rounded-lg p-8">
                 <p className="text-vt-gray-700 mb-6">
-                  Наши специалисты готовы помочь вам с выбором продукции и ответить на любые вопросы
+                  Есть вопросы? Заполните форму ниже, и мы свяжемся с вами в ближайшее время
                 </p>
                 
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-vt-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0">
-                      <Icon name="Mail" size={24} />
-                    </div>
-                    <div>
-                      <div className="text-sm text-vt-gray-600">Email</div>
-                      <a 
-                        href="mailto:info@vtcosmetic.ru" 
-                        className="text-lg font-medium text-vt-green-500 hover:underline"
-                      >
-                        info@vtcosmetic.ru
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-vt-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0">
-                      <Icon name="Clock" size={24} />
-                    </div>
-                    <div>
-                      <div className="text-sm text-vt-gray-600">Время работы</div>
-                      <div className="text-lg font-medium">Ежедневно с 10:00 до 21:00</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-vt-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0">
-                      <Icon name="MessageCircle" size={24} />
-                    </div>
-                    <div>
-                      <div className="text-sm text-vt-gray-600">Онлайн-консультация</div>
-                      <div className="text-lg font-medium">Telegram, VKontakte</div>
-                    </div>
-                  </div>
-                </div>
-
-                <Button className="mt-6 bg-vt-green-500 hover:bg-vt-green-600 text-white">
-                  Написать нам
-                </Button>
+                <ContactForm />
               </div>
             </section>
           </div>

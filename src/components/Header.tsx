@@ -4,6 +4,13 @@ import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import func2url from '../../backend/func2url.json';
 
 interface HeaderProps {
@@ -17,16 +24,15 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [allProducts, setAllProducts] = useState<any[]>([]);
+  const [showAccountDialog, setShowAccountDialog] = useState(false);
   const navigate = useNavigate();
   const { logout } = useAuth();
 
   const topMenu = [
     { name: "Доставка и оплата", href: "/delivery" },
-    { name: "Отслеживание заказа", href: "#tracking" },
     { name: "Помощь", href: "/help" },
     { name: "Скидки", href: "/discounts" },
-    { name: "О магазине", href: "/about" },
-    { name: "Отзывы", href: "#reviews" }
+    { name: "О магазине", href: "/about" }
   ];
 
   const catalogMenu = [
@@ -94,7 +100,12 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
               <a href="mailto:info@cosmeticstar.ru" className="text-vt-gray-600 hover:text-vt-green-500 transition">
                 info@cosmeticstar.ru
               </a>
-              <Button variant="ghost" size="sm" className="text-xs">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-xs"
+                onClick={() => setShowAccountDialog(true)}
+              >
                 Вход / Регистрация
               </Button>
             </div>
@@ -239,6 +250,38 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
           </div>
         </div>
       </header>
+
+      <Dialog open={showAccountDialog} onOpenChange={setShowAccountDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-vt-green-500">
+              <Icon name="Info" size={24} />
+              Личный кабинет временно недоступен
+            </DialogTitle>
+            <DialogDescription className="pt-4">
+              <div className="space-y-4">
+                <p className="text-vt-gray-700">
+                  Сейчас функция личного кабинета находится на доработке. 
+                </p>
+                <p className="text-vt-gray-700">
+                  Если у вас есть вопросы или вам нужна помощь, пожалуйста, воспользуйтесь формой обратной связи.
+                </p>
+                <div className="pt-2">
+                  <Button
+                    onClick={() => {
+                      setShowAccountDialog(false);
+                      navigate('/help#contact-form');
+                    }}
+                    className="w-full bg-vt-green-500 hover:bg-vt-green-600 text-white"
+                  >
+                    Перейти к форме обратной связи
+                  </Button>
+                </div>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

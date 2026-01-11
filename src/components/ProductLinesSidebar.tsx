@@ -1,19 +1,35 @@
-import { Link } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
-const ProductLinesSidebar = () => {
+interface ProductLinesSidebarProps {
+  onLineSelect?: (line: string) => void;
+}
+
+const ProductLinesSidebar = ({ onLineSelect }: ProductLinesSidebarProps) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const selectedLine = searchParams.get('line');
+
   const productLines = [
-    { name: "REEDLE SHOT", link: "/catalog?line=REEDLE%20SHOT" },
-    { name: "PDRN", link: "/catalog?line=PDRN" },
-    { name: "CICA", link: "/catalog?line=CICA" },
-    { name: "GLUCAMUNE", link: "/catalog?line=GLUCAMUNE" },
-    { name: "TX-TONING", link: "/catalog?line=TX-TONING" },
-    { name: "JUMBO SOLUTION", link: "/catalog?line=JUMBO%20SOLUTION" },
-    { name: "COLLAGEN PACT", link: "/catalog?line=COLLAGEN%20PACT" },
-    { name: "SUPER HYALON", link: "/catalog?line=SUPER%20HYALON" },
-    { name: "MILD REEDLE SHOT", link: "/catalog?line=MILD%20REEDLE%20SHOT" },
-    { name: "PRO CICA", link: "/catalog?line=PRO%20CICA" }
+    { name: "REEDLE SHOT", value: "REEDLE SHOT" },
+    { name: "PDRN", value: "PDRN" },
+    { name: "CICA", value: "CICA" },
+    { name: "GLUCAMUNE", value: "GLUCAMUNE" },
+    { name: "TX-TONING", value: "TX-TONING" },
+    { name: "JUMBO SOLUTION", value: "JUMBO SOLUTION" },
+    { name: "COLLAGEN PACT", value: "COLLAGEN PACT" },
+    { name: "SUPER HYALON", value: "SUPER HYALON" },
+    { name: "MILD REEDLE SHOT", value: "MILD REEDLE SHOT" },
+    { name: "PRO CICA", value: "PRO CICA" }
   ];
+
+  const handleLineClick = (lineValue: string) => {
+    if (onLineSelect) {
+      onLineSelect(lineValue);
+    } else {
+      navigate(`/catalog?line=${encodeURIComponent(lineValue)}`);
+    }
+  };
 
   return (
     <div className="border border-vt-gray-200 rounded-lg p-6">
@@ -21,13 +37,21 @@ const ProductLinesSidebar = () => {
       <ul className="space-y-2">
         {productLines.map((line, index) => (
           <li key={index}>
-            <Link 
-              to={line.link} 
-              className="text-sm text-vt-gray-700 hover:text-vt-green-500 transition-colors flex items-center gap-2 group"
+            <button
+              onClick={() => handleLineClick(line.value)}
+              className={`text-sm w-full text-left transition-colors flex items-center gap-2 group ${
+                selectedLine === line.value ? 'text-vt-green-500 font-medium' : 'text-vt-gray-700 hover:text-vt-green-500'
+              }`}
             >
-              <Icon name="ChevronRight" size={14} className="text-vt-green-500 opacity-0 group-hover:opacity-100 transition" />
+              <Icon 
+                name="ChevronRight" 
+                size={14} 
+                className={`text-vt-green-500 transition ${
+                  selectedLine === line.value ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}
+              />
               {line.name}
-            </Link>
+            </button>
           </li>
         ))}
       </ul>

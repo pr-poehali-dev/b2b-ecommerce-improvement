@@ -1,14 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /upload-images
+
+Sitemap: https://vtcosmetic.ru/sitemap.xml
+
+User-agent: Yandex
+Allow: /
+Disallow: /login
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /upload-images
+Clean-param: utm_source&utm_medium&utm_campaign&fbclid&gclid
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: *
 Allow: /

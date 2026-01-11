@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { products, productLines, categories } from "@/data/products";
+import { productLines, categories } from "@/data/products";
 import { useCatalogFilters } from "@/hooks/useCatalogFilters";
 import { useCart } from "@/contexts/CartContext";
+import func2url from '../../backend/func2url.json';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+  inStock: boolean;
+}
 
 const Catalog = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -15,6 +25,23 @@ const Catalog = () => {
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000 });
   const [showNewOnly, setShowNewOnly] = useState(false);
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch(func2url.products);
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   const addToCart = (productId: number) => {
     const product = products.find(p => p.id === productId);
@@ -31,11 +58,20 @@ const Catalog = () => {
 
   const filteredProducts = products.filter(product => {
     if (selectedCategory && product.category !== selectedCategory) return false;
-    if (selectedLine && product.line !== selectedLine) return false;
     if (product.price < priceRange.min || product.price > priceRange.max) return false;
-    if (showNewOnly && !product.isNew) return false;
     return true;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <Icon name="Loader2" className="animate-spin h-8 w-8 mx-auto mb-4 text-vt-green-500" />
+          <p className="text-gray-600">Загрузка товаров...</p>
+        </div>
+      </div>
+    );
+  }
 
   const clearFilters = () => {
     setSelectedCategory(null);
@@ -199,27 +235,18 @@ const Catalog = () => {
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                        {product.isNew && (
-                          <div className="absolute top-3 left-3 bg-vt-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                            NEW
-                          </div>
-                        )}
                       </div>
                     </Link>
                     
                     <div className="p-4">
-                      <div className="text-xs text-vt-gray-500 mb-1">{product.line}</div>
+                      <div className="text-xs text-vt-gray-500 mb-1">{product.category}</div>
                       <Link to={`/product/${product.id}`}>
                         <h3 className="font-semibold text-vt-gray-900 mb-2 line-clamp-2 min-h-[2.5rem] hover:text-vt-green-500 transition">
                           {product.name}
                         </h3>
                       </Link>
-                      <p className="text-xs text-vt-gray-600 mb-3 line-clamp-2">
-                        {product.description}
-                      </p>
                       <div className="flex items-center justify-between mb-3">
                         <div>
-                          <div className="text-sm text-vt-gray-500">{product.volume}</div>
                           <div className="text-xl font-bold text-vt-green-500">
                             {product.price.toLocaleString('ru-RU')} ₽
                           </div>

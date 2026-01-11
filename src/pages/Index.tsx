@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -7,8 +7,17 @@ import Cart from "@/components/Cart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
-import { products as catalogProducts } from "@/data/products";
 import { useNavigate } from "react-router-dom";
+import func2url from '../../backend/func2url.json';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+  inStock: boolean;
+}
 
 const Index = () => {
   const navigate = useNavigate();
@@ -16,6 +25,23 @@ const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("bestsellers");
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCatalog, setShowCatalog] = useState(false);
+  const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch(func2url.products);
+        const data = await response.json();
+        setCatalogProducts(data);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   const categories = [
     { id: "bestsellers", name: "Бестселлеры" },

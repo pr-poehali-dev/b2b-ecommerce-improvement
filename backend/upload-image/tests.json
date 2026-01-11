@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Test missing fields",
+      "method": "POST",
+      "body": {
+        "productName": "Test Product"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

@@ -21,6 +21,7 @@ import Privacy from "./pages/Privacy";
 import SalesRules from "./pages/SalesRules";
 import Consent from "./pages/Consent";
 import NotFound from "./pages/NotFound";
+import UploadImages from "./pages/UploadImages";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/privacy" element={<ProtectedRoute><Privacy /></ProtectedRoute>} />
             <Route path="/sales-rules" element={<ProtectedRoute><SalesRules /></ProtectedRoute>} />
             <Route path="/consent" element={<ProtectedRoute><Consent /></ProtectedRoute>} />
+            <Route path="/upload-images" element={<ProtectedRoute><UploadImages /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

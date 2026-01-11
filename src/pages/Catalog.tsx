@@ -17,6 +17,7 @@ interface Product {
   image: string;
   category: string;
   inStock: boolean;
+  description: string;
 }
 
 const Catalog = () => {
@@ -245,6 +246,11 @@ const Catalog = () => {
                           {product.name}
                         </h3>
                       </Link>
+                      {product.description && (
+                        <p className="text-xs text-vt-gray-600 mb-3 line-clamp-2">
+                          {product.description}
+                        </p>
+                      )}
                       <div className="flex items-center justify-between mb-3">
                         <div>
                           <div className="text-xl font-bold text-vt-green-500">

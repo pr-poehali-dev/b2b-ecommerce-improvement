@@ -17,6 +17,7 @@ interface Product {
   image: string;
   category: string;
   inStock: boolean;
+  description: string;
 }
 
 const Index = () => {

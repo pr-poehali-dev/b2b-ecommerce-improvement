@@ -30,7 +30,7 @@ def handler(event: dict, context) -> dict:
     conn = psycopg2.connect(dsn)
     cursor = conn.cursor()
     
-    cursor.execute('SELECT id, name, price, image_url, category, in_stock FROM products WHERE in_stock = true ORDER BY id')
+    cursor.execute('SELECT id, name, price, image_url, category, in_stock, description FROM products WHERE in_stock = true ORDER BY id')
     
     rows = cursor.fetchall()
     
@@ -42,7 +42,8 @@ def handler(event: dict, context) -> dict:
             'price': row[2],
             'image': row[3],
             'category': row[4] or 'Косметика',
-            'inStock': row[5]
+            'inStock': row[5],
+            'description': row[6] or ''
         })
     
     cursor.close()

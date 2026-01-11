@@ -15,6 +15,7 @@ interface Product {
   image: string;
   category: string;
   inStock: boolean;
+  description: string;
 }
 
 const ProductDetail = () => {
@@ -117,27 +118,20 @@ const ProductDetail = () => {
             <div className="aspect-square bg-vt-gray-50 rounded-lg overflow-hidden border border-vt-gray-200">
               <img
                 src={product.image}
-                alt={product.fullName}
+                alt={product.name}
                 className="w-full h-full object-cover"
               />
             </div>
           </div>
 
           <div>
-            {product.isNew && (
-              <div className="inline-block bg-vt-green-500 text-white text-sm font-semibold px-4 py-1 rounded-full mb-4">
-                НОВИНКА
-              </div>
-            )}
-            
-            <div className="text-sm text-vt-gray-500 mb-2">VT Cosmetics • {product.line}</div>
-            <h1 className="text-3xl font-bold text-vt-gray-900 mb-4">{product.fullName}</h1>
+            <div className="text-sm text-vt-gray-500 mb-2">VT Cosmetics</div>
+            <h1 className="text-3xl font-bold text-vt-gray-900 mb-4">{product.name}</h1>
             
             <div className="flex items-baseline gap-4 mb-6">
               <div className="text-4xl font-bold text-vt-green-500">
                 {product.price.toLocaleString('ru-RU')} ₽
               </div>
-              <div className="text-lg text-vt-gray-500">{product.volume}</div>
             </div>
 
             <div className="bg-vt-gray-50 rounded-lg p-6 mb-6">

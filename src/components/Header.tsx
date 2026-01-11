@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import func2url from '../../backend/func2url.json';
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -12,6 +13,10 @@ interface HeaderProps {
 
 const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   const [showCatalog, setShowCatalog] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [allProducts, setAllProducts] = useState<any[]>([]);
   const navigate = useNavigate();
   const { logout } = useAuth();
 
@@ -25,13 +30,49 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   ];
 
   const catalogMenu = [
-    { name: "Уход за лицом", icon: "Sparkles", link: "/catalog?category=Уход%20за%20лицом" },
-    { name: "Уход за телом", icon: "Heart", link: "/catalog?category=Уход%20за%20телом" },
-    { name: "Уход за волосами", icon: "Scissors", link: "/catalog?category=Уход%20за%20волосами" },
-    { name: "Макияж", icon: "Palette", link: "/catalog?category=Макияж" },
-    { name: "Ногти", icon: "Hand", link: "/catalog?category=Ногти" },
-    { name: "Профессиональная косметика", icon: "Award", link: "/catalog?category=Профессиональная%20косметика" }
+    { name: "Очищение", icon: "Droplet", link: "/catalog?category=Очищение" },
+    { name: "Тонеры и пады", icon: "Sparkles", link: "/catalog?category=Тонеры%20и%20пады" },
+    { name: "Сыворотки", icon: "Droplets", link: "/catalog?category=Сыворотки" },
+    { name: "Кремы и бальзамы", icon: "Heart", link: "/catalog?category=Кремы%20и%20бальзамы" },
+    { name: "Маски и патчи", icon: "Smile", link: "/catalog?category=Маски%20и%20патчи" },
+    { name: "Солнцезащитные средства", icon: "Sun", link: "/catalog?category=Солнцезащитные%20средства" }
   ];
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch(func2url.products);
+        const data = await response.json();
+        setAllProducts(data);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      const filtered = allProducts.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSearchResults(filtered.slice(0, 5));
+      setShowSearchResults(true);
+    } else {
+      setSearchResults([]);
+      setShowSearchResults(false);
+    }
+  }, [searchQuery, allProducts]);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalog?search=${encodeURIComponent(searchQuery)}`);
+      setShowSearchResults(false);
+      setSearchQuery("");
+    }
+  };
 
   return (
     <>
@@ -103,24 +144,66 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
                   )}
                 </div>
                 
-                <Button variant="ghost" className="text-vt-green-500">
-                  Бренды
-                </Button>
+
               </div>
             </div>
 
             <div className="flex-1 max-w-xl mx-8">
-              <div className="relative">
+              <form onSubmit={handleSearchSubmit} className="relative">
                 <Input 
                   placeholder="Поиск товаров..."
                   className="pr-10 border-vt-gray-300 focus:border-vt-green-500"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => searchQuery && setShowSearchResults(true)}
+                  onBlur={() => setTimeout(() => setShowSearchResults(false), 200)}
                 />
-                <Icon 
-                  name="Search" 
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-vt-gray-600" 
-                  size={18} 
-                />
-              </div>
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
+                  <Icon 
+                    name="Search" 
+                    className="text-vt-gray-600 hover:text-vt-green-500 cursor-pointer" 
+                    size={18} 
+                  />
+                </button>
+                
+                {showSearchResults && searchResults.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-vt-gray-300 shadow-lg z-50 max-h-96 overflow-y-auto">
+                    {searchResults.map((product) => (
+                      <Link
+                        key={product.id}
+                        to={`/product/${product.id}`}
+                        className="flex items-center gap-4 px-4 py-3 hover:bg-vt-gray-100 transition"
+                        onClick={() => {
+                          setShowSearchResults(false);
+                          setSearchQuery("");
+                        }}
+                      >
+                        <img 
+                          src={product.image} 
+                          alt={product.name}
+                          className="w-12 h-12 object-cover rounded"
+                        />
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-vt-green-500">{product.name}</div>
+                          <div className="text-xs text-vt-gray-600">{product.price} ₽</div>
+                        </div>
+                      </Link>
+                    ))}
+                    {searchQuery && (
+                      <Link
+                        to={`/catalog?search=${encodeURIComponent(searchQuery)}`}
+                        className="block px-4 py-3 text-sm text-center text-vt-green-500 hover:bg-vt-gray-100 border-t border-vt-gray-200"
+                        onClick={() => {
+                          setShowSearchResults(false);
+                          setSearchQuery("");
+                        }}
+                      >
+                        Показать все результаты
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </form>
             </div>
 
             <div className="flex items-center gap-4">

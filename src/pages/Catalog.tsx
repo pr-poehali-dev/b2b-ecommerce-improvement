@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
@@ -20,6 +20,7 @@ interface Product {
 }
 
 const Catalog = () => {
+  const [searchParams] = useSearchParams();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000 });
@@ -42,6 +43,13 @@ const Catalog = () => {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [searchParams]);
+
   const addToCart = (productId: number) => {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -55,7 +63,16 @@ const Catalog = () => {
     });
   };
 
+  const searchQuery = searchParams.get('search');
+  
   const filteredProducts = products.filter(product => {
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesSearch = 
+        product.name.toLowerCase().includes(query) ||
+        product.description?.toLowerCase().includes(query);
+      if (!matchesSearch) return false;
+    }
     if (selectedCategory && product.category !== selectedCategory) return false;
     if (product.price < priceRange.min || product.price > priceRange.max) return false;
     return true;
@@ -75,6 +92,7 @@ const Catalog = () => {
   const clearFilters = () => {
     setSelectedCategory(null);
     setPriceRange({ min: 0, max: 10000 });
+    window.history.replaceState({}, '', '/catalog');
   };
 
   return (
@@ -98,9 +116,14 @@ const Catalog = () => {
             <Icon name="ChevronRight" size={16} />
             <span className="text-white">Каталог</span>
           </nav>
-          <h1 className="text-4xl font-bold mb-4">Каталог товаров</h1>
+          <h1 className="text-4xl font-bold mb-4">
+            {searchQuery ? `Результаты поиска: "${searchQuery}"` : selectedCategory || 'Каталог товаров'}
+          </h1>
           <p className="text-lg text-white/90">
-            Полный ассортимент косметики VT Cosmetics
+            {searchQuery 
+              ? `Найдено товаров: ${filteredProducts.length}`
+              : 'Полный ассортимент косметики VT Cosmetics'
+            }
           </p>
         </div>
       </div>

@@ -47,7 +47,7 @@ const App = () => (
             <Route path="/privacy" element={<ProtectedRoute><Privacy /></ProtectedRoute>} />
             <Route path="/sales-rules" element={<ProtectedRoute><SalesRules /></ProtectedRoute>} />
             <Route path="/consent" element={<ProtectedRoute><Consent /></ProtectedRoute>} />
-            <Route path="/upload-images" element={<ProtectedRoute><UploadImages /></ProtectedRoute>} />
+            <Route path="/upload-images" element={<UploadImages />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

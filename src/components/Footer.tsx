@@ -15,9 +15,9 @@ const Footer = () => {
               />
             </div>
             <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="#privacy" className="hover:text-white transition">Политика конфиденциальности</a></li>
-              <li><a href="#rules" className="hover:text-white transition">Правила продажи</a></li>
-              <li><a href="#consent" className="hover:text-white transition">Согласие на обработку персональных данных</a></li>
+              <li><Link to="/privacy" className="hover:text-white transition">Политика конфиденциальности</Link></li>
+              <li><Link to="/sales-rules" className="hover:text-white transition">Правила продажи</Link></li>
+              <li><Link to="/consent" className="hover:text-white transition">Согласие на обработку персональных данных</Link></li>
             </ul>
           </div>
           
@@ -61,7 +61,7 @@ const Footer = () => {
         </div>
         
         <div className="pt-8 border-t border-white/20 text-sm text-white/80">
-          <p>© Интернет-магазин профессиональной и салонной косметики Cosmetic Star (Косметик Стар)</p>
+          <p>© Все права на товарные знаки принадлежат их законным владельцам</p>
         </div>
       </div>
     </footer>

@@ -118,6 +118,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
                     className="border-vt-green-500 text-vt-green-500 hover:bg-vt-green-600 hover:text-white"
                     onMouseEnter={() => setShowCatalog(true)}
                     onMouseLeave={() => setShowCatalog(false)}
+                    onClick={() => navigate('/catalog')}
                   >
                     <Icon name="Menu" className="mr-2" size={18} />
                     Каталог

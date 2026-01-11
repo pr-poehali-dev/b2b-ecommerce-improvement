@@ -17,6 +17,9 @@ import ProductDetail from "./pages/ProductDetail";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import Login from "./pages/Login";
+import Privacy from "./pages/Privacy";
+import SalesRules from "./pages/SalesRules";
+import Consent from "./pages/Consent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +43,9 @@ const App = () => (
             <Route path="/product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
             <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
             <Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
+            <Route path="/privacy" element={<ProtectedRoute><Privacy /></ProtectedRoute>} />
+            <Route path="/sales-rules" element={<ProtectedRoute><SalesRules /></ProtectedRoute>} />
+            <Route path="/consent" element={<ProtectedRoute><Consent /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

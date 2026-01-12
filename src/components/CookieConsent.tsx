@@ -24,7 +24,7 @@ export default function CookieConsent() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <p className="text-sm text-gray-700 flex-1 min-w-[250px]">
-            Просмотр сайта подразумевает согласие с{' '}
+            Мы используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с{' '}
             <Link to="/privacy" className="text-[#00A19C] hover:underline font-medium">
               Политикой конфиденциальности
             </Link>

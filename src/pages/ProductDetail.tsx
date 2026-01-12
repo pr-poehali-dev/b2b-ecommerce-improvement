@@ -116,30 +116,25 @@ const ProductDetail = () => {
     }
   } : null;
 
-  const getDescription = () => {
-    if (!product.description) return `${product.name} - оригинальная корейская косметика VT Cosmetics`;
-    return product.description.length > 150 
-      ? `${product.description.substring(0, 150)}...` 
-      : product.description;
-  };
-
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>{product.name} - купить по цене {product.price} ₽ | VT Cosmetics</title>
-        <meta name="description" content={`${getDescription()} Купить по цене ${product.price} ₽ с доставкой по России. Гарантия подлинности.`} />
-        <meta property="og:title" content={`${product.name} | VT Cosmetics`} />
-        <meta property="og:description" content={getDescription()} />
-        <meta property="og:image" content={product.image} />
-        <meta property="og:url" content={`https://vtcosmetic.ru/product/${product.id}`} />
-        <meta property="og:type" content="product" />
-        <meta property="product:price:amount" content={String(product.price)} />
-        <meta property="product:price:currency" content="RUB" />
-        <link rel="canonical" href={`https://vtcosmetic.ru/product/${product.id}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(productJsonLd)}
-        </script>
-      </Helmet>
+      {product && (
+        <Helmet>
+          <title>{`${product.name} - купить по цене ${product.price} ₽ | VT Cosmetics`}</title>
+          <meta name="description" content={`${product.description || product.name} Купить по цене ${product.price} ₽ с доставкой по России. Гарантия подлинности.`} />
+          <meta property="og:title" content={`${product.name} | VT Cosmetics`} />
+          <meta property="og:description" content={product.description || product.name} />
+          <meta property="og:image" content={product.image} />
+          <meta property="og:url" content={`https://vtcosmetic.ru/product/${product.id}`} />
+          <meta property="og:type" content="product" />
+          <meta property="product:price:amount" content={String(product.price)} />
+          <meta property="product:price:currency" content="RUB" />
+          <link rel="canonical" href={`https://vtcosmetic.ru/product/${product.id}`} />
+          <script type="application/ld+json">
+            {JSON.stringify(productJsonLd)}
+          </script>
+        </Helmet>
+      )}
       <Cart
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}

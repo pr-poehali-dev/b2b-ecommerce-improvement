@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -106,8 +107,47 @@ const Index = () => {
     });
   };
 
+  const catalogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Каталог косметики VT Cosmetics",
+    "numberOfItems": filteredProducts.length,
+    "itemListElement": filteredProducts.slice(0, 8).map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Product",
+        "name": product.name,
+        "image": product.image,
+        "brand": {
+          "@type": "Brand",
+          "name": "VT Cosmetics"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": product.price,
+          "priceCurrency": "RUB",
+          "availability": "https://schema.org/InStock",
+          "url": `https://vtcosmetic.ru/product/${product.id}`
+        }
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>VT Cosmetics - Официальный магазин корейской косметики | Купить с доставкой по России</title>
+        <meta name="description" content="Магазин оригинальной косметики VT Cosmetics. Бустеры-сыворотки с микроиглами, PDRN, CICA. Гарантия качества. Быстрая доставка по всей России." />
+        <meta property="og:title" content="VT Cosmetics - Официальный магазин корейской косметики" />
+        <meta property="og:description" content="Оригинальная косметика VT Cosmetics с доставкой по России. Бестселлеры, новинки, скидки." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://vtcosmetic.ru/" />
+        <link rel="canonical" href="https://vtcosmetic.ru/" />
+        <script type="application/ld+json">
+          {JSON.stringify(catalogJsonLd)}
+        </script>
+      </Helmet>
       <Cart
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -165,6 +205,7 @@ const Index = () => {
                   <img 
                     src={product.image} 
                     alt={product.name}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">

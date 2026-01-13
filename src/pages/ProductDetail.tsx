@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
@@ -147,15 +148,12 @@ const ProductDetail = () => {
         onCartClick={() => setIsCartOpen(true)}
       />
 
-      <div className="bg-vt-gray-50 py-8">
+      <div className="bg-vt-gray-50">
         <div className="container mx-auto px-4">
-          <nav className="flex items-center gap-2 text-sm text-vt-gray-600">
-            <Link to="/" className="hover:text-vt-green-500 transition">Главная</Link>
-            <Icon name="ChevronRight" size={16} />
-            <Link to="/catalog" className="hover:text-vt-green-500 transition">Каталог</Link>
-            <Icon name="ChevronRight" size={16} />
-            <span className="text-vt-green-500">{product.name}</span>
-          </nav>
+          <Breadcrumbs items={[
+            { label: "Каталог", path: "/catalog" },
+            { label: product.name }
+          ]} />
         </div>
       </div>
 
@@ -166,6 +164,7 @@ const ProductDetail = () => {
               <img
                 src={product.image}
                 alt={product.name}
+                loading="eager"
                 className="w-full h-full object-cover"
               />
             </div>

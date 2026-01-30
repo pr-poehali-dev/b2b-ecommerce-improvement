@@ -64,7 +64,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
       setSearchResults([]);
       setShowSearchResults(false);
     }
-  }, [searchQuery, allProducts]);
+  }, [searchQuery]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();

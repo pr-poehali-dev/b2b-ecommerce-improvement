@@ -8,7 +8,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import func2url from '../../backend/func2url.json';
+import { productsFromDB } from "@/data/productsFromDB";
 
 interface Product {
   id: number;
@@ -28,23 +28,7 @@ const ProductDetail = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await fetch(func2url.products);
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Failed to load products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadProducts();
-  }, []);
+  const products: Product[] = productsFromDB;
 
   const product = products.find(p => p.id === Number(id));
 
@@ -68,17 +52,6 @@ const ProductDetail = () => {
   };
 
 
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <Icon name="Loader2" className="animate-spin h-8 w-8 mx-auto mb-4 text-vt-green-500" />
-          <p className="text-gray-600">Загрузка товара...</p>
-        </div>
-      </div>
-    );
-  }
 
   if (!product) {
     return (

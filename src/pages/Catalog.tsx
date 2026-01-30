@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { categories } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
 import ProductLinesSidebar from "@/components/ProductLinesSidebar";
-import func2url from '../../backend/func2url.json';
+import { productsFromDB } from "@/data/productsFromDB";
 
 interface Product {
   id: number;
@@ -27,23 +27,7 @@ const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000 });
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await fetch(func2url.products);
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Failed to load products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadProducts();
-  }, []);
+  const products: Product[] = productsFromDB;
 
   useEffect(() => {
     const categoryParam = searchParams.get('category');

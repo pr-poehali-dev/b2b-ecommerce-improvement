@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import func2url from '../../backend/func2url.json';
+import { productsFromDB } from "@/data/productsFromDB";
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -24,22 +24,10 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [showAccountDialog, setShowAccountDialog] = useState(false);
-  const [allProducts, setAllProducts] = useState<any[]>([]);
   const navigate = useNavigate();
   const { logout } = useAuth();
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await fetch(func2url.products);
-        const data = await response.json();
-        setAllProducts(data);
-      } catch (error) {
-        console.error('Failed to load products:', error);
-      }
-    };
-    loadProducts();
-  }, []);
+  
+  const allProducts = productsFromDB;
 
   const topMenu = [
     { name: "Доставка и оплата", href: "/delivery" },
@@ -69,7 +57,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
       setSearchResults([]);
       setShowSearchResults(false);
     }
-  }, [searchQuery, allProducts]);
+  }, [searchQuery]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();

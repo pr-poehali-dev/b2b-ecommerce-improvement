@@ -41,7 +41,7 @@ export const products: Product[] = [
     description: "Сыворотка с микроиглами спикулы. Запускает процессы оздоровления и обновления кожи, разглаживает микрорельеф, уменьшает размер пор.",
     category: "Уход за лицом",
     line: "REEDLE SHOT",
-    image: "https://koreanbutik.ru/image/cache/catalog/items5/53490-408x613.jpg",
+    image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/7d4a7dd1-48a1-434c-a9e4-6718577d1157.jpg",
     isHit: true
   },
   {
@@ -196,7 +196,7 @@ export const products: Product[] = [
     description: "Гидроколлоидные патчи от воспалений.",
     category: "Уход за лицом",
     line: "CICA",
-    image: "https://koreanbutik.ru/image/cache/catalog/items5/53786-408x613.jpg"
+    image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/f49de608-8f32-408a-ae9e-9324fb348042.jpg"
   },
   {
     id: 16,
@@ -438,7 +438,7 @@ export const products: Product[] = [
     description: "Кушон с гиалуроновой кислотой для увлажнения и покрытия.",
     category: "Макияж",
     line: "SUPER HYALON",
-    image: "https://koreanbutik.ru/image/cache/catalog/items5/53714-408x613.jpg"
+    image: "https://cdn.poehali.dev/projects/8895b578-b7a9-4a45-a2e3-e52914af5d81/files/9c1ba26e-8bec-4166-8beb-de06f7aebff5.jpg"
   },
   {
     id: 38,

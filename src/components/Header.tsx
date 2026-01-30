@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Icon from "@/components/ui/icon";
@@ -27,14 +27,14 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
-  const allProducts = productsData.map(p => ({
+  const allProducts = useMemo(() => productsData.map(p => ({
     id: p.id,
     name: p.fullName,
     price: p.price,
     image: p.image,
     category: p.category,
     description: p.description
-  }));
+  })), []);
 
   const topMenu = [
     { name: "Доставка и оплата", href: "/delivery" },

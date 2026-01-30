@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import ProductLinesSidebar from "@/components/ProductLinesSidebar";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
-import { products as productsData } from "@/data/products";
+import func2url from '../../backend/func2url.json';
 
 interface Product {
   id: number;
@@ -28,16 +28,23 @@ const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("bestsellers");
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCatalog, setShowCatalog] = useState(false);
-  
-  const catalogProducts: Product[] = productsData.map(p => ({
-    id: p.id,
-    name: p.fullName,
-    price: p.price,
-    image: p.image,
-    category: p.category,
-    inStock: true,
-    description: p.description
-  }));
+  const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch(func2url.products);
+        const data = await response.json();
+        setCatalogProducts(data);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   const categories = [
     { id: "bestsellers", name: "Бестселлеры" },

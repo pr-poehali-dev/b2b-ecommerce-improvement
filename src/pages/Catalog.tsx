@@ -6,9 +6,10 @@ import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { categories, products as productsData } from "@/data/products";
+import { categories } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
 import ProductLinesSidebar from "@/components/ProductLinesSidebar";
+import func2url from '../../backend/func2url.json';
 
 interface Product {
   id: number;
@@ -26,15 +27,23 @@ const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000 });
   const { cartItems, addToCart: addToCartContext, updateQuantity, removeItem, getTotalItems } = useCart();
-  const products: Product[] = productsData.map(p => ({
-    id: p.id,
-    name: p.fullName,
-    price: p.price,
-    image: p.image,
-    category: p.category,
-    inStock: true,
-    description: p.description
-  }));
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch(func2url.products);
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   useEffect(() => {
     const categoryParam = searchParams.get('category');

@@ -1,0 +1,7 @@
+/*
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=3600
+
+/404.html
+  X-Robots-Tag: noindex
+  Cache-Control: no-cache

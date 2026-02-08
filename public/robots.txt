@@ -4,8 +4,12 @@ Disallow: /login
 Disallow: /checkout
 Disallow: /order-success
 Disallow: /upload-images
+Disallow: /admin
+Disallow: /api
+Disallow: /*.json$
 
 Sitemap: https://vtcosmetic.ru/sitemap.xml
+Host: https://vtcosmetic.ru
 
 User-agent: Yandex
 Allow: /
@@ -13,10 +17,16 @@ Disallow: /login
 Disallow: /checkout
 Disallow: /order-success
 Disallow: /upload-images
-Clean-param: utm_source&utm_medium&utm_campaign&fbclid&gclid
+Disallow: /admin
+Clean-param: utm_source&utm_medium&utm_campaign&fbclid&gclid&yclid
 
 User-agent: Googlebot
 Allow: /
+Disallow: /login
+Disallow: /checkout
+Disallow: /admin
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1

@@ -8,6 +8,7 @@ import Cart from "@/components/Cart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductLinesSidebar from "@/components/ProductLinesSidebar";
+import SeoText from "@/components/SeoText";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import { productsFromDB } from "@/data/productsFromDB";
@@ -187,6 +188,16 @@ const Index = () => {
         onCartClick={() => setIsCartOpen(true)}
       />
 
+      <section className="bg-gradient-to-b from-vt-green-50 to-white py-8 border-b border-vt-gray-200">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-vt-gray-900 text-center mb-4">
+            VT Cosmetics — Корейская косметика премиум-класса
+          </h1>
+          <p className="text-lg text-vt-gray-700 text-center max-w-3xl mx-auto">
+            Официальный интернет-магазин косметики VT Cosmetics в России. Инновационные средства для ухода за кожей с доставкой по всей стране.
+          </p>
+        </div>
+      </section>
 
       <section className="py-12 bg-vt-gray-100">
         <div className="container mx-auto px-4">
@@ -346,7 +357,9 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <SeoText />
+
+      <section className="py-16 bg-white border-t border-vt-gray-200">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-semibold mb-4">Подписка на рассылку</h2>

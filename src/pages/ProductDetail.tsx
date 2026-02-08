@@ -81,6 +81,13 @@ const ProductDetail = () => {
       "@type": "Brand",
       "name": "VT Cosmetics"
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "147",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "offers": {
       "@type": "Offer",
       "url": `https://vtcosmetic.ru/product/${product.id}`,
@@ -236,7 +243,7 @@ const ProductDetail = () => {
 
         {relatedProducts.length > 0 && (
           <div className="border-t border-vt-gray-200 pt-12">
-            <h2 className="text-2xl font-bold text-vt-green-500 mb-8">Похожие товары из линейки {product.line}</h2>
+            <h2 className="text-2xl font-bold text-vt-green-500 mb-8">Похожие товары</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <Link

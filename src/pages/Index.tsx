@@ -74,7 +74,7 @@ const Index = () => {
     });
   }, [catalogProducts]);
 
-  const brands = ["VT COSMETICS", "HOLY LAND", "GIGI", "Christina", "Anna Lotan", "Dermalogica"];
+
 
   const filteredProducts = selectedCategory === "bestsellers" 
     ? products 
@@ -90,6 +90,45 @@ const Index = () => {
       price: `${product.price} ₽`,
       image: product.image
     });
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Как проверить подлинность косметики VT Cosmetics?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Мы работаем только с официальными поставщиками VT Cosmetics. Каждый товар имеет оригинальную упаковку, голограмму и можно проверить по штрих-коду на официальном сайте производителя."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Сколько времени занимает доставка?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Доставка по Москве — 1-2 дня, по России — 3-7 дней в зависимости от региона. Отправляем заказы ежедневно."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли вернуть товар?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, вы можете вернуть товар в течение 14 дней с момента получения, если упаковка не была вскрыта. Полные условия возврата указаны в разделе Доставка и оплата."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Есть ли у вас программа лояльности?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да! При первом заказе вы получаете скидку 10%. Постоянным покупателям доступны специальные предложения и накопительная система бонусов."
+        }
+      }
+    ]
   };
 
   const catalogJsonLd = {
@@ -131,6 +170,9 @@ const Index = () => {
         <link rel="canonical" href="https://vtcosmetic.ru/" />
         <script type="application/ld+json">
           {JSON.stringify(catalogJsonLd)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(faqJsonLd)}
         </script>
       </Helmet>
       <Cart
